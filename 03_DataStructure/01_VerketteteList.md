@@ -106,9 +106,9 @@ Bei dieser Strategie wird das Element, welches zuletzt eingefügt wurde, zuerst 
 	- **empty:** prüft, ob der Stapel leer ist,
 	- **full:** prüft, ob der Stapel voll ist.
 
-![[DataStructure/image/Pasted image 20230626150019.png]]
+![[image/Pasted image 20230626150019.png]]
 
-![[DataStructure/image/Pasted image 20230626154510.png]]
+![[image/Pasted image 20230626154510.png]]
 
 ## 4.3 Stapel-Schnittstelle `interface Stack<E>` 
 
@@ -225,7 +225,7 @@ public class ArrayStack<E> implements Stack<E> {
 
 Wir wollen die Methode empty so implementieren, dass ein Stapel dann leer ist, sobald top auf einen Index mit dem Wert -1 verweist. Das ist kein gültiger Reihungsindex (array index). Dieser Sachverhalt ist in der folgenden Abbildung dargestellt:
 
-![[DataStructure/image/Pasted image 20230626150707.png]]
+![[image/Pasted image 20230626150707.png]]
 
 ```java
 /**
@@ -244,7 +244,7 @@ public boolean empty() {
 
 Die full-Methode ist ebenfalls über die Index-Abfrage schnell zu programmieren. Ein Stapel ist voll, wenn der Wert im top der größte Index der Reihung (stack.length-1) ist.
 
-![[DataStructure/image/Pasted image 20230626150744.png]]
+![[image/Pasted image 20230626150744.png]]
 
 ```java
 
@@ -269,7 +269,7 @@ Deshalb muss zunächst geprüft werden, ob der Stapel nicht voll ist.  需要检
 - Ist noch "Platz" im Stapel, wird der Wert in top um eins erhöht und an dieser Position in der Reihung eine Referenz auf ein neues Objekt gespeichert.
 - Wenn der Stapel voll ist, wollen wir eine FullStackException auslösen. 
 
-![[DataStructure/image/Pasted image 20230626151541.png]]
+![[image/Pasted image 20230626151541.png]]
 
 ### 4.4.4 pop-Methode
 
@@ -289,12 +289,12 @@ Für die Bezeichnung des Anfangs der Warteschlange ist der Begriff head üblich,
 
 ## 5.1 Implementierung einer Warteschlange mit Hilfe von Reihungen
 
-![[DataStructure/image/Pasted image 20230626153212.png]]
+![[image/Pasted image 20230626153212.png]]
 
 
-![[DataStructure/image/Pasted image 20230626154530.png]]
+![[image/Pasted image 20230626154530.png]]
 
-![[DataStructure/image/Pasted image 20230626154556.png]]
+![[image/Pasted image 20230626154556.png]]
 
 ## 5.2 Ring-Struktur/Zirkuläre Datenstruktur
 Die Ring-Struktur entsteht dadurch, dass die Zeiger head und tail auf den leeren Reihungsanfang gesetzt werden, wenn diese das Reihungsende erreichen. Dadurch wird es möglich die leeren Reihungsplätze, die durch das Entfernen von Elementen am Anfang der Warteschlange entstanden, erneut mit Elementen zu füllen
@@ -306,9 +306,9 @@ Die Ring-Struktur entsteht dadurch, dass die Zeiger head und tail auf den leeren
 Sorgfältige Verwaltung von Indexpositionen und Bedingungen für Hinzufügen und Entfernen von Elementen sorgfältig
 
 tail 到 array 最后的时候， 就会弹跳到一开头
-![[DataStructure/image/Pasted image 20230626153503.png]]
+![[image/Pasted image 20230626153503.png]]
 
-![[DataStructure/image/Pasted image 20230626154641.png]]
+![[image/Pasted image 20230626154641.png]]
 
 
 ## 5.3 Warteschlangen-Schnittstelle `public interface QueueGen<E>`
@@ -465,7 +465,7 @@ public boolean full() {
 } 
 ```
 
-![[DataStructure/image/Pasted image 20230626155524.png]]
+![[image/Pasted image 20230626155524.png]]
 
 
 ### 5.4.3 enqueue
@@ -477,7 +477,7 @@ Ein neues Element kann erst in die Warteschlange (queue) eingefügt werden, nach
 	- Wenn tail auf die letzte Position von queue zeigt, wird tail zur ersten Position von queue bewegt (WrapAround-Verfahren), sonst wird tail nur um eine Position weiter bewegt.
 - Sobald die Warteschlange voll ist und kein Element mehr eingefügt werden kann, wird die entsprechende Ausnahme (exception) ausgelöst.
 
-![[DataStructure/image/Pasted image 20230626160137.png]]
+![[image/Pasted image 20230626160137.png]]
 
 
 ### 5.4.4 head()
@@ -516,7 +516,7 @@ dequeue 的返回值为 返回的元素
 	5. Das gemerkte Element wird als Rückgabewert (return value) von der Methode zurückgegeben. 
 3. War die Warteschlange leer, wird die entsprechende Ausnahme (exception) ausgelöst.
 
-![[DataStructure/image/Pasted image 20230626160821.png]]
+![[image/Pasted image 20230626160821.png]]
 
 
 
@@ -529,7 +529,7 @@ dequeue 的返回值为 返回的元素
 4. zweifach verkettete Listen 
 	1. zusätzlich jeweils mit ihrem Vorgänger (predecessor) oder weiteren Nachbarn verbunden sind.
 
-![[DataStructure/image/Pasted image 20230630145622.png]]
+![[image/Pasted image 20230630145622.png]]
 
 Stack: Läuft in eine Richtung head = 1. Element oder null (leere Liste) Verweis auf Nachfolger (next)
 Queue: Läuft in eine Richtung head = 1. Element tail = letztes element oder null (leere Liste) Verweis auf Nachfolger (next
@@ -543,7 +543,7 @@ In einer einfach verketteten Liste besteht jedes Element aus einer Referenz auf 
 - Head: 
 	- Eine Referenz verweist auf das erste Listenelement. Es ist der "Anker", an dem die ganze Liste hängt. In der folgenden Abbildung wird er mit head bezeichnet
 
-![[DataStructure/image/Pasted image 20230626171912.png]]
+![[image/Pasted image 20230626171912.png]]
 
 
 ### 6.1.1 每个 listNode
@@ -670,7 +670,7 @@ Wie eingangs bereits erwähnt, handelt es sich bei den Verketteten Listen um dyn
 
 Bei der push-Operation soll ein neues Objekt an der Spitze des Stapels eingefügt werden. Zu diesem Zweck wird ein neues ListNode-Objekt erzeugt, das übergebene Objekt e wird im Konstruktor in die Instanzvariable element des ListNode-Objekts gespeichert. Dann wird das neu erzeugte ListNode-Objekt am Anfang der Liste mit dem Nachfolger-Element (successor element) verkettet.
 
-![[DataStructure/image/Pasted image 20230629231316.png]]
+![[image/Pasted image 20230629231316.png]]
 
 
 Textversion: push-Methode in der einfach verketteteten Liste
@@ -777,7 +777,7 @@ Für die Warteschlange sollen die aus dem [Kapitel 3](https://moodle.oncampus.de
 |**full**|Da es sich bei der Warteschlange als verkettete Liste um einen dynamischen Datentyp handelt, liefert die **full**-Methode standardmäßig den Wert **false** zurück.|
 |**toString**|Liefert eine Darstellung der Warteschlange als Zeichenkette (String).|
 
-![[DataStructure/image/Pasted image 20230629232450.png]]
+![[image/Pasted image 20230629232450.png]]
 
 
 ## 8.1 Warteschlangen-Schnittstelle und ihre Implementierung
@@ -821,7 +821,7 @@ public class ListQueueGen<E> implements QueueGen<E> {
 
 ## 8.2 Methode
 
-![[DataStructure/image/Pasted image 20230629232914.png]]
+![[image/Pasted image 20230629232914.png]]
 
 ### 8.2.1 empty-Methode
 
@@ -960,11 +960,11 @@ Textversion: dequeue-Methode für Warteschlange (Liste)
 Eine Liste ist eine Datenstruktur, die Elemente in einer Reihenfolge speichert. Wenn wir allgemeine dynamische Datenmengen (dynamic amounts of data) mit Hilfe von Listen implementieren möchten, müssen wir an einer beliebigen Stelle der Liste Elemente einfügen (insert) oder löschen (remove) können.
 
 Wir werden eine Einfüge-Operation und eine Lösch-Operation definieren, die ein Element an der Position i einfügt oder löscht. Dafür braucht die Implementierung mit verketteten Listen ein Referenz-Objekt (in unserer Implementierung vor genannt), das sich durch die Liste bewegt und als nächstes Element das Element an der Position i hat.
-![[DataStructure/image/Pasted image 20230629235034.png]]
+![[image/Pasted image 20230629235034.png]]
 
 Die Elemente einer Reihung (array) befinden sich immer nebeneinander im Speicher.
 Dadurch kann ein direkter Zugriff auf die verschiedenen Elemente mit Hilfe eines Indizes erfolgen. Bei verketteten Listen ist es anders: Man hat ständig nur die Adresse eines Knotens (node). Um weitere Knoten der Liste zu erreichen, muss die Verkettung der Knoten verfolgt werden. Erst nachdem ein Knoten besucht worden ist, wird deutlich, wo sich sein Nachfolger (successor) befindet.
-![[DataStructure/image/Pasted image 20230629235053.png]]
+![[image/Pasted image 20230629235053.png]]
 
 
 
@@ -1020,7 +1020,7 @@ Textversion: Einfügen hinter dem aktuellen Element (current)
 
 ## 9.2 Die Lösch-Operation  (删除中间的某个node)
 
-![[DataStructure/image/Pasted image 20230629235851.png]]
+![[image/Pasted image 20230629235851.png]]
 
 Ebenfalls wirft die Lösch-Operation eine Ausnahme, wenn die Position nicht gültig ist oder auch wenn die Liste leer ist. Es gibt hier auch zwei Sonderfälle. Der Sonderfall i ist 0 bedeutet, ähnlich wie bei der Methode insert, dass das erste Element gelöscht wird. Der Sonderfall i == size()-1 bedeutet, dass das letzte Element gelöscht wird und dass tail sich verändert: das vorige Element wird zum tail. Im Gegensatz zu insert, muss der Vorgänger auch in diesem Fall ermittelt werden.
 
@@ -1121,7 +1121,7 @@ class DListNode<E extends Comparable<? super E>> {
 } 
 ```
 
-![[DataStructure/image/Pasted image 20230630093326.png]]
+![[image/Pasted image 20230630093326.png]]
 
 Läuft in beiden Richtung head = 1. Element. tail = letztes element. Verweis auf Nachfolger (next) und Vorgänger (pre) current = aktuelles Elemen
 
@@ -1131,7 +1131,7 @@ Läuft in beiden Richtung head = 1. Element. tail = letztes element. Verweis auf
 
 Eine doppelt verkettete leere List
 Eine doppelt verkettete leere Liste besteht lediglich aus den beiden Dummy-Elementen:
-![[DataStructure/image/Pasted image 20230630093614.png]]
+![[image/Pasted image 20230630093614.png]]
 
 
 
@@ -1149,9 +1149,9 @@ public boolean empty() {
 Die folgende Diashow zeigt, wie ein neues Element in eine doppelt verkettete Liste (doubly linked list) eingefügt wird. Die Dummy-Elemente stellen sicher, dass jedes neues DListNode-Objekt immer zwischen zwei vorhandenen eingefügt werden kann. 
 Dadurch wird die Einfüge-Operation einfacher, weil weniger Fälle zu überprüfen sind. Das neue Element wird in ein DListNode-Objekt verpackt und dieses hinter das DListNode-Objekt eingeführt – auf das current zeigt.
 
-![[DataStructure/image/Pasted image 20230630094728.png]]
+![[image/Pasted image 20230630094728.png]]
 
-![[DataStructure/image/Pasted image 20230630094546.png]]
+![[image/Pasted image 20230630094546.png]]
 
 Die Abbildung zeigt einen Abschnitt aus der gesamten Liste und nur die Kernoperationen, die für die Verkettung nötig sind.
 
@@ -1166,11 +1166,11 @@ Die Abbildung zeigt einen Abschnitt aus der gesamten Liste und nur die Kernopera
 
 Die Diashow zeigt, wie in einer doppelt verketteten Liste (doubly linked list) das Element gelöscht wird, auf das current zeigt. Nach dem Löschen wird current auf den Listenanfang gesetzt
 
-![[DataStructure/image/Pasted image 20230630094755.png]]
+![[image/Pasted image 20230630094755.png]]
 
-![[DataStructure/image/Pasted image 20230630094812.png]]
+![[image/Pasted image 20230630094812.png]]
 
-![[DataStructure/image/Pasted image 20230630094741.png]]
+![[image/Pasted image 20230630094741.png]]
 
 1. Mit doppelt verketteten Listen können wir genau das Objekt löschen, auf das current zeigt. Die Abbildung zeigt einen Abschnitt aus der gesamten Liste und nur die Kernoperationen, die für die Verkettung nötig sind.
 2. Der Vorgänger des DListNode – Objekt, das wir löschen wollen, bekommt als Nachfolger den Nachfolger von current.
@@ -1185,7 +1185,7 @@ Daraus entsteht eine doppelt verkettete Zirkularliste (doubly linked circular li
 - 就一个 Dummy Konten : Wir können aber anstatt zweier **dummy**-Knoten nur einen verwenden, wenn wir diesen zwischen dem Kopf (head) und dem Ende der Liste (tail) verketten. 
 - 不再需要 tail zeiger Wir brauchen dann keine tail-Zeiger mehr in unserer Liste, weil das letzte Element der Liste mit head.prev erreicht werden kann.
 
-![[DataStructure/image/Pasted image 20230630101229.png]]
+![[image/Pasted image 20230630101229.png]]
 
 
 
@@ -1227,12 +1227,12 @@ Der Programmierer kann z. B. die Knoten-Referenzen zweier verschiedener Listen v
 Um diese Probleme zu vermeiden, verwendet man Iteratoren. Ein Listeniterator stellt Operationen zur Verfügung, mit dessen Hilfe eine Liste durchlaufen werden kann. Mehrere Iteratoren können mit derselben Liste gleichzeitig verwendet werden. So hat der Benutzer keinen direkten Zugriff auf die Liste oder auf den Index (current-Zeiger) der Liste.
 
 
-![[DataStructure/image/Pasted image 20230630102022.png]]
+![[image/Pasted image 20230630102022.png]]
 
 
 
 # 13 Java-Klassen für Listen (ArrayList und LinedList)
 
-![[DataStructure/image/Pasted image 20230630134738.png]]
+![[image/Pasted image 20230630134738.png]]
 
 Die Klasse ArrayList verwendet dynamische Arrays (Reihungen).  <br>Die Klasse LinkedList verwendet doppelt verkettete Listen und bietet die Funktionalität der Datenstrukturen Stack (Stapel) und Queue (Warteschlangen).|
