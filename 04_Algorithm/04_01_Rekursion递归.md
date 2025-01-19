@@ -22,8 +22,11 @@ Nachteil:
 - Kann zu einem höheren Speicherbedarf führen, da bei jedem Aufruf neuer Speicher allokiert wird (Stack-Speicherung)
 - Evtl. laufzeitintensiv
 
+![[04_Algorithm/image/Pasted image 20250119192151.png]]
 
 ## 1.1 Direkte und indirekte rekursive Aufrufe
+
+![[04_Algorithm/image/Pasted image 20250119192200.png]]
 
 Bei der direkten Rekursion ruft sich eine Methode selbst auf. 
 Bei der indirekten Rekursion dagegen, ruft eine Methode eine andere Methode auf. Diese ruft dann wieder die erste Methode direkt oder indirekt auf. 
@@ -165,14 +168,7 @@ static int iterativ(int zahl) {
 
 ```
 
-
-## 1.3 Merkmale der linearen Rekursion (linear recursion) 
-
-jeder Aufruf löst (maximal) einen weiteren Aufruf aus und
-die Anzahl rekursiver Aufrufe ist linear abhängig von den Kontrollvariablen.
-
-
-## 1.4 Speicherverwaltung
+## 1.3 Speicherverwaltung
 
 Iterativ programmierte Methoden benutzen einen festen Speicherbereich während der Abarbeitung, während bei rekursiven Methoden bei jedem Methodenaufruf erneut Speicherbereich bereitgestellt wird. Rekursive Methoden benötigen demzufolge bedeutend mehr Speicher während der Laufzeit. 
 Der Laufzeitspeicher ist als ==Stapel (stack)== organisiert und wird deshalb als Laufzeitstack bezeichnet. Mit Rekursion kann dieser Speichermechanismus zur Übergabe von Variablenwerten elegant ausgenutzt werden.
@@ -212,8 +208,62 @@ Weitere rekursive Beschreibungen in der Mathematik sind:
 - **Die Potenzierung mit einem natürlichen Exponenten wird auf die Multiplikation zurückgeführt:**  
     Die n-te Potenz einer Zahl ist die (n-1)-te Potenz der Zahl multipliziert mit der Zahl. Ende der Rekursion: Die 1-te Potenz einer Zahl ist die Zahl selbst.
 
+# 3 linearen Rekursion (linear recursion) 
 
-## 2.1 例子 Quicksort
+jeder Aufruf löst (maximal) einen weiteren Aufruf aus und
+die Anzahl rekursiver Aufrufe ist linear abhängig von den Kontrollvariablen.
+
+
+### 3.1.1 Beispiel: Tuerme von Hanoi 
+
+Türme von Hanoi
+• Ziel des Spiels: Scheibenstapel von links nach rechts bringen
+• Regeln:
+- nur eine Scheibe darf bewegt werden
+- niemals eine größere Scheibe über einer kleineren
+• Anzahl T(n) der nötigen Schritte bei n Scheiben
+
+![[04_Algorithm/image/Pasted image 20250119192501.png]]
+
+![[04_Algorithm/image/Pasted image 20250119194125.png]]
+
+![[04_Algorithm/image/Pasted image 20250119192817.png]]
+
+![[04_Algorithm/image/Pasted image 20250119192853.png]]
+
+
+
+# 4 Nichtlineare Rekursion
+
+## 4.1 Divide & Conquer
+
+• Divide: zerlege Problem in gleichartige (aber kleinere) Unterprobleme
+• Conquer: sind die kleineren Unterprobleme lösbar, ist kein Divide mehr nötig
+• füge alle Teillösungen zusammen (kann nicht einfach sein)
+• fertig
+
+![[04_Algorithm/image/Pasted image 20250119193310.png]]
+
+
+## 4.2 Merge Sort
+
+- Merge Sort: Zerlegung in gleichgroße Teilprobleme ergibt Rekursionsbaum
+- technische Details werden bei theoretischer Betrachtung ignoriert
+
+![[04_Algorithm/image/Pasted image 20250119193343.png]]
+
+![[04_Algorithm/image/Pasted image 20250119193403.png]]
+
+---
+
+Laufzeit 计算 
+
+![[04_Algorithm/image/Pasted image 20250119193521.png]]
+
+![[04_Algorithm/image/Pasted image 20250119194043.png]]
+
+
+## 4.3 例子 Quicksort
 
 Quicksort ist eine typische Anwendung des Prinzips Divide-&-Conquer, zu deutsch teile und herrsche. Alle Probleme dieser Art lassen sich rekursiv am besten lösen.  
 Quicksort ist ein Sortieralgorithmus (sorting algorithm). Er sortiert eine Sequenz fester Länge von ungeordneten Elementen.  
@@ -276,3 +326,12 @@ class QuickSort {
 }
 
 ```
+
+
+# 5 Master-Theorem
+
+
+![[04_Algorithm/image/Pasted image 20250119193621.png]]
+
+
+![[04_Algorithm/image/Pasted image 20250119193955.png]]
