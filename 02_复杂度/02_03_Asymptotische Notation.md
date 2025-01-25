@@ -59,10 +59,9 @@ Ober- und Untergrenze
 
 就是 介于 Ober- und Untergrenze 之间 存在的函数 
 
+![[02_复杂度/image/Pasted image 20250120183337.png]]
+
 ![[02_复杂度/image/Pasted image 20250119182202.png]]
-
-
-
 
 
 
@@ -168,6 +167,9 @@ it raises n to the power of m
 
 
 # 4 常见的复杂度量级
+
+
+![[02_复杂度/image/Pasted image 20250125174045.png]]
 
 
 ![Image](https://mmbiz.qpic.cn/mmbiz_jpg/D67peceibeISTRz5ibO62oFJIY3OQIc2nQ3ehplzibAZCr5xOzzBM1icVr8PUDHq9AFmicGrGSNIhGjFLYmybFtyA3A/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
@@ -331,9 +333,61 @@ Logarithm of n to the base 2:
 
 
 
-# 5 计算复杂度 Ubung 
+# 5 Optimalität
 
-## 5.1 
+ein Algorithmus ist optimal, wenn es keinen anderen (auch noch unbekannten) Algorithmus geben kann, welcher das Problem effizienter (im Sinne einer Komplexitätsklasse) lösen kann
+• Wie beweisen?
+- beweise Komplexitätsklasse des Algorithmus
+- zeige, dass das Problem (nicht der Algorithmus) untere Komplexitätsschranke hat
+- wenn untere Schranke des Problems = Klasse des Algorithmus
+	- ➔ optimal
+
+# 6 计算复杂度 Ubung 
+
+## 6.1 Gausssche Summenformel  等差函数求和 
+
+![[02_复杂度/image/Pasted image 20250120110438.png]]
+
+## 6.2 等比函数 求和
+
+![[02_复杂度/image/Pasted image 20250125173046.png]]
+
+
+![[02_复杂度/image/Pasted image 20250125173053.png]]
+
+
+
+---
+
+
+公比 q≠1
+
+若等比数列的首项为 aaa，公比为 q，前 n 项和 $S_n$ 的公式为：
+
+![[02_复杂度/image/Pasted image 20250120192335.png]]
+
+- a 是首项
+- q 是公比
+- n 是项数
+
+----
+
+公比 q=1
+
+当 q=1 时，等比数列退化为常数列，每一项都等于 a。因此前 n 项和公式为：
+
+$S_n$=a⋅n,  q=1
+
+
+
+## 6.3 ##
+
+![[02_复杂度/image/Pasted image 20250120111047.png]]
+
+# 7 Ubung: Obergrenz, Unterngrenz
+
+一定要找出 $c_0$ 和 $n_0$ 
+## 7.1 
 
 Merke:
 - wähle richtige Ungleichung
@@ -345,18 +399,35 @@ Merke:
 ![[02_复杂度/image/Pasted image 20250119182810.png]]
 
 
-## 5.2 
+## 7.2 
 
 ![[02_复杂度/image/Pasted image 20250119182837.png]]
 
+## 7.3 
+
+![[02_复杂度/image/Pasted image 20250120111436.png]]
 
 
-# 6 Optimalität
 
-ein Algorithmus ist optimal, wenn es keinen anderen (auch noch unbekannten) Algorithmus geben kann, welcher das Problem effizienter (im Sinne einer Komplexitätsklasse) lösen kann
-• Wie beweisen?
-- beweise Komplexitätsklasse des Algorithmus
-- zeige, dass das Problem (nicht der Algorithmus) untere Komplexitätsschranke hat
-- wenn untere Schranke des Problems = Klasse des Algorithmus
-	- ➔ optimal
+![[02_复杂度/image/Pasted image 20250120111512.png]]
+
+![[02_复杂度/image/Pasted image 20250120111541.png]]
+
+![[02_复杂度/image/Pasted image 20250120111549.png]]
+
+
+## 7.4 Groß-Oh
+
+![[02_复杂度/image/Pasted image 20250125172715.png]]
+
+
+
+## 7.5 Groß-Omega
+
+![[02_复杂度/image/Pasted image 20250125172804.png]]
+
+
+## 7.6 Groß-Theta
+
+![[02_复杂度/image/Pasted image 20250125172935.png]]
 

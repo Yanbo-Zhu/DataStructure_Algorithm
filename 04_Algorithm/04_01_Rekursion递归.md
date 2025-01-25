@@ -214,7 +214,7 @@ jeder Aufruf löst (maximal) einen weiteren Aufruf aus und
 die Anzahl rekursiver Aufrufe ist linear abhängig von den Kontrollvariablen.
 
 
-### 3.1.1 Beispiel: Tuerme von Hanoi 
+## 3.1 Beispiel: Tuerme von Hanoi 
 
 Türme von Hanoi
 • Ziel des Spiels: Scheibenstapel von links nach rechts bringen
@@ -330,8 +330,92 @@ class QuickSort {
 
 # 5 Master-Theorem
 
+来自 webkonferenz folien 
 
 ![[04_Algorithm/image/Pasted image 20250119193621.png]]
 
 
+
 ![[04_Algorithm/image/Pasted image 20250119193955.png]]
+
+
+## 5.1 Beispiel 
+
+### 5.1.1 
+
+来自 02_prasnez   pdf 
+
+![[02_复杂度/image/Pasted image 20250120113958.png]]
+
+(a) Stellen Sie die Rekursionsgleichung zur Bestimmung der Zeitkomplexität des Algorithmus RE-KALG7 in Abhängigkeit von der Eingabegröße auf und geben Sie an, welches die für die Zeit-komplexität relevante Eingabegröße ist. (Vernachlässigen Sie dabei die Gaussklammern.)
+
+![[02_复杂度/image/Pasted image 20250120114125.png]]
+
+![[02_复杂度/image/Pasted image 20250120114358.png]]
+
+Eingabe grosse ist n 
+因为  zeile 11   z = n   ,  然后 k 和 J 的取值 都为 n to 1 
+z <-  z + h (k,j)    这个 grundlegenede Operation  要被 做 n^2 次   , 因为 要 h (n.to 1, 1 to n ), 
+然后  W(x,y) = theta 1 
+所以 f(n)   = N ^ 2   multiply  1 
+
+b=3
+因为  zeile 17 to 19 有三个 
+
+c=2, 因为 每个的 区间长度为 n/2,   
+
+f(n) = n^2 , 因为 
+
+
+---
+
+(b) Bestimmen Sie die Zeitkomplexität des Algorithmus REKALG7.
+
+![[02_复杂度/image/Pasted image 20250120114404.png]]
+
+### 5.1.2 ###
+
+From webkonferenz klausurvorbeireitung pdf 
+
+![[04_Algorithm/image/Pasted image 20250125174425.png]]
+
+
+### 5.1.3 
+
+
+![[04_Algorithm/image/Pasted image 20250125195314.png]]
+
+
+- Eingabegröße bestimmen
+	- → Rekursion hängt grundsätzlich von n ab
+- rekursive Anteile
+	- b bestimmen
+		- es wird 5 mal rekursiv verzweigt:  b = 5 
+	- c bestimmen
+		- jede rekursive Verzweigung bekommt eine halb so große Eingabe : c =2 
+- nichtrekursive Anteile
+	- f(n) bestimmen
+		- `O(n)*O(n)*O(1)= O(n2)`
+		- f(n) ∈ O(n2)
+		- ![[04_Algorithm/image/Pasted image 20250125195601.png]]
+	- konstante Basis
+		- konstant = 1
+		- ![[04_Algorithm/image/Pasted image 20250125195610.png]]
+
+
+Master-Theorem anwenden:
+- b = 5, c = 2, f(n) = $n^2$ (d.h. k = 2), konstant = 1
+- ![[04_Algorithm/image/Pasted image 20250125195648.png]]
+
+
+
+
+
+
+# 6 Linear-Rekursion 复杂度的计算公式 
+
+不会在考试中出现 
+
+![[04_Algorithm/image/Pasted image 20250125174324.png]]
+
+

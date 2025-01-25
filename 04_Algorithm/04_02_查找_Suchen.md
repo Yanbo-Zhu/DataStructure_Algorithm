@@ -1,7 +1,6 @@
 https://blog.csdn.net/Sparkle_007/article/details/54971257
 
 
-
 # 1 总览
 
 线性表查找
@@ -598,3 +597,56 @@ int binarySearchRotateOnce(int a[], int n, int t)
     return -1; 
 }
 ```
+
+
+
+# 4 Sequentielle Suche
+
+
+wenn keine weiteren Annahmen über Eingabe, dann muss jeder Eintrag potentiell überprüft werden
+
+![[04_Algorithm/image/Pasted image 20250125195959.png]]
+
+![[04_Algorithm/image/Pasted image 20250125200017.png]]
+
+
+![[04_Algorithm/image/Pasted image 20250125200039.png]]
+
+一个 interval  从 1 到 m (step 为1), 从里面查找n .  需要通过 1 ( 第一个数就是要找的n ) or 2 ( 第二个数就是要找的n ) or 3 or 4 or n 次比较   找到了n.    而且每个数 element 本身在 list A 中出现的概率是 1/m .  则 可以得到 能够在数组中找到 n 这个数据的凭据概率为  1/m * (1+2+…+ n)
+
+一个 interval  从 1 到 m (step 为1), 从里面查找n .    通过比较了 n 次, 确定在 这个 list A 不包含 这个 n值.    list A  中每个 element 不为 n 的概率为  (m- n) /m  . 在查找过程中一共比较了n次
+
+![[04_Algorithm/image/Pasted image 20250125200107.png]]
+
+
+## 4.1 Sequentielle Suche Zeitkomplizität 
+
+Daten unsortiert: optimal  $\Theta(n)$
+Daten sortiert: nicht optimal, dann binäre Suche optimal $\Theta(log n)$
+
+
+
+
+## 4.2 Sequentielle Suche im Sortierte Array 
+
+
+![[04_Algorithm/image/Pasted image 20250125200433.png]]
+
+
+
+## 4.3 Binäre Suche
+
+从中间开始搜 
+
+• sequentielles Suchen in sortierter Liste ignoriert Sortierungseigenschaft
+• Wie Sortierung ausnutzen?
+• sortierte Liste macht Suchrichtung bestimmbar:
+- untersuchtes Element zu klein, suche in Richtung größerer Elemente
+- untersuchtes Element zu groß, suche in Richtung kleinerer Elemente
+- Und wo am besten anfangen? In der Mitte!
+(am Rand anfangen wäre wieder wie sequentielle Suche)
+
+![[04_Algorithm/image/Pasted image 20250125200718.png]]
+
+
+
