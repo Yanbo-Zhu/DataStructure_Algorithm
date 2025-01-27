@@ -102,18 +102,99 @@ Gibt es Faelle, in denen der Algorithmus nicht korrekt funktioniert?
 
 ![[98_ESAundProklausur/image/Pasted image 20250120102050.png]]
 
+Algorithmus 1.1 (A1)
+Eingabe: l: Liste, x: Zahl
+Ausgabe: ??
+A1(l; x)
+1 y   l:head
+2 while y 6= nil ^ y:key 6= x do
+3 y   y:next
+4 return y
+
+Suchen Funktion 
+
+Komplexität: 
+- **O(n)** im Worst Case, wobei nnn die Anzahl der Knoten in der Liste ist. Dies tritt ein, wenn der gesuchte Wert entweder am Ende der Liste liegt oder nicht in der Liste enthalten ist.
+- **O(k)** im Best Case, wobei kkk die Position des gesuchten Knotens vom Anfang der Liste ist (falls er früh gefunden wird).
+
+Die Funktion ist **korrekt**, da sie:
+- Den Kopf der Liste als Startpunkt nimmt und jeden Knoten linear besucht.
+- Den Schlüssel des aktuellen Knotens mit xxx vergleicht und, falls er übereinstimmt, den Knoten zurückgibt.
+- Falls kein passender Knoten gefunden wird, endet die Schleife bei y=nily = \text{nil}y=nil, und die Funktion gibt korrekt nil\text{nil}nil zurück.
+
+
+
 ## 2.2 Algorithmus 1.2 (A2)
 
 ![[98_ESAundProklausur/image/Pasted image 20250120102117.png]]
+
+Algorithmus 1.2 (A2)
+Eingabe: l: Liste, x: Zahl
+Ausgabe: ??
+A2(l; x)
+11 y   l:head
+12 z   0
+13 while y 6= nil do
+14 y   y:next
+15 z   z + 1
+16 return z
+
+
+Die Funktion berechnet die Länge der Liste lll und gibt diese zurück.
+
+**O(n)** im Worst Case, wobei nnn die Anzahl der Knoten in der Liste ist. Jeder Knoten wird genau einmal besucht, bis die Liste vollständig durchlaufen ist.
+
+Die Funktion ist korrekt, da sie die Liste systematisch durchläuft und die Anzahl der Knoten zählt. xxx hat keine Relevanz für den Algorithmus.
 
 ## 2.3 Algorithmus 1.3 (A3)
 
 ![[98_ESAundProklausur/image/Pasted image 20250120102131.png]]
 
+Algorithmus 1.3 (A3)
+Eingabe: l: Liste, x: Zahl
+Ausgabe: ??
+A3(l; x)
+21 y   l:tail
+22 z   0
+23 while z < x do
+24 y   y:prev
+25 z   z + 1
+26 return y
+
+
+find the  x-th element form End of the List L 
+Die Funktion A3(l,x)A3(l, x)A3(l,x) gibt den **x-ten Knoten von hinten** einer doppelt verketteten Liste l zurück. Wenn x größer als die Länge der Liste ist, wird eine falsche Referenz oder ein ungültiger Wert zurückgegeben (abhängig von der Implementierung).
+
+**O(x)** im Worst Case, da x Schritte von l.taill aus durchgeführt werden. Die restliche Liste wird nicht durchsucht.
+
+
+Nicht Korrekt,  wenn  x > length of List l 
+
+
 
 ## 2.4 Algorithmus 1.4 (A4)
 
 ![[98_ESAundProklausur/image/Pasted image 20250120102146.png]]
+
+Algorithmus 1.4 (A4)
+Eingabe: l: Liste, x: Zahl
+Ausgabe: ??
+A4(l; x)
+31 y   l:head
+32 while y 6= nil ^ y:key 6= x do
+33 y   y:next
+34 repeat
+35 y:prev:next   y:next
+36 y:next:prev   y:prev
+37 return y
+
+Der Algorithmus A4(l,x)A4(l, x)A4(l,x) durchsucht eine doppelt verkettete Liste lll nach einem Knoten mit dem Schlüssel xxx und entfernt ihn, falls er gefunden wird. Anschließend gibt er diesen Knoten zurück.
+
+**O(n)** im Worst Case, da der Algorithmus die Liste linear durchsucht, bis der Knoten yyy gefunden wird oder das Ende der Liste erreicht ist.
+
+**Korrektheit:**
+- Korrekt, wenn die Liste doppelt verkettet ist und korrekt implementiert wurde.
+- Robust für leere Listen und nicht vorhandene Schlüssel.
 
 
 # 3 Analyse von Algorithmen
@@ -122,6 +203,26 @@ Gegeben sei der folgende Algorithmus zur Bestimmung, ob ein Feld ueberall ohne 
 
 ![[98_ESAundProklausur/image/Pasted image 20250120102605.png]]
 
+Gegeben sei der folgende Algorithmus zur Bestimmung, ob ein Feld uberall ohne Lucken steigend
+oder fallend ist (Beispiel: (1; 2; 3; 2; 3) !true, (1; 2; 4; 3) !false):
+Algorithmus 2.5 (NoGap1)
+Eingabe: A = (a1; : : : ; an) mit ai; i; n 2 N; 1  i  n; x 2 N
+Ausgabe: true wenn ai = ai + 1  1 alle 1  i < n
+NoGap1(A)
+1 for i   2 to n 􀀀 1 do
+2 for j   i 􀀀 1 to i + 1 do
+3 if j  1 ^ j  n ^ j A[i] 􀀀 A[j] j  2 then
+4 return false
+5 return true
+
+
+```python
+for i <- 2 to n-1 do
+	for j <- i-1 to i+1 do
+		if j >= 1 and j <= n and  |A[i] - A[j]| >= 2 then
+			return false
+return true
+```
 
 (a) Bestimmen Sie die Eingabegröße bzw. die Eingabegrößen.
 (b) Welches ist die grundlegende Anweisung zur Bestimmung der Zeitkomplexität bei NoGap1?
@@ -129,8 +230,86 @@ Gegeben sei der folgende Algorithmus zur Bestimmung, ob ein Feld ueberall ohne 
 (d) Geben Sie die Zeitkomplexität im schlechtesten Fall in asymptotischer Notation an, ohne Beweis.
 (e) Welche Eingaben führen zum schlechtesten Fall, welche Eingaben sind schneller verarbeitet?
 (f) Gibt es Fälle, in denen der Algorithmus nicht korrekt funktioniert?
+(g) Gibt es einen Algorithmus, der dieselbe Aufgabe im schlechtesten Fall effizienter löst? Welcher? Welche Komplexität?Z
+
+
+## 3.1 a
+Bestimmen Sie die Eingabegröße bzw. die Eingabegrößen.
+
+A = (a1; : : : ; an) mit Length n 
+
+
+## 3.2 b
+Welches ist die grundlegende Anweisung zur Bestimmung der Zeitkomplexität bei NoGap1?
+
+Zeile 3 
+`if j  1 ^ j  n ^ j A[i] 􀀀 A[j] j  2 `
+
+
+## 3.3 c
+Wie häufig wird die grundlegende Anweisung im schlechtesten Fall ausgeführt (exakt)?
+
+3 ( n -2 )  =  3n -6 
+
+## 3.4 d
+(d) Geben Sie die Zeitkomplexität im schlechtesten Fall in asymptotischer Notation an, ohne Beweis.
+
+O(n)
+
+## 3.5 e
+(e) Welche Eingaben führen zum schlechtesten Fall, welche Eingaben sind schneller verarbeitet?
+
+Der schlechteste Fall tritt ein, wenn die Bedingung in der `if`-Anweisung nie erfüllt ist, sodass der Algorithmus **die gesamte Schleife** vollständig durchläuft. Dies geschieht, wenn das Array AAA durchgängig die Bedingung ∣A[i]−A[j]∣<2|A[i] - A[j]| < 2∣A[i]−A[j]∣<2 erfüllt. Beispiele:
+A=(1,2,3,2,3)oderA=(5,6,5,6,5).
+
+---
+
+
+Der Algorithmus terminiert schneller, wenn die Bedingung ∣A[i]−A[j]∣≥2|A[i] - A[j]| \geq 2∣A[i]−A[j]∣≥2 früh erfüllt wird, da er dann `false` zurückgibt und nicht weiter iteriert. Dies geschieht, wenn bereits ein früher Wert im Array eine Differenz von 2 oder mehr aufweist. Beispiele:
+
+A=(1,2,4,3)  (Abbruch in der zweiten Iteration).
+
+
+## 3.6 f
+(f) Gibt es Fälle, in denen der Algorithmus nicht korrekt funktioniert?
+
+**Leere oder zu kurze Arrays:**  
+Wenn n<2  ist der Algorithmus nicht anwendbar, da die Schleifen nicht korrekt initialisiert werden können.
+
+## 3.7 g
 (g) Gibt es einen Algorithmus, der dieselbe Aufgabe im schlechtesten Fall effizienter löst? Welcher? Welche Komplexität?
 
+
+```python
+for i <- 2 to n-1 do
+	for j <- i-1 to i+1 do
+		if j >= 1 and j <= n and  |A[i] - A[j]| >= 2 then
+			return false
+return true
+```
+
+
+Der gegebene Algorithmus hat eine **Zeitkomplexität von O(n)O(n)O(n)** im schlechtesten Fall, da er jeden Eintrag im Array AAA maximal 3-mal prüft. Es ist daher **schwer, einen effizienteren Algorithmus** für diese Aufgabe zu finden, da der Algorithmus bereits linear ist.
+
+Ein alternativer Ansatz könnte sein:
+1. Den Abstand zwischen aufeinanderfolgenden Elementen direkt zu prüfen, statt eine verschachtelte Schleife zu verwenden.
+2. Diese Überprüfung läuft in einer **einfachen Schleife über das Array A:**
+
+---
+
+**Optimierter Algorithmus:**
+
+```
+def NoGapOptimized(A):
+    for i in range(1, len(A)):
+        if abs(A[i] - A[i-1]) >= 2:
+            return False
+    return True
+```
+
+**Komplexität:**
+- **Schlechtester Fall:** O(n)O(n)O(n), da jedes Paar von Elementen genau einmal verglichen wird.
+- **Effizienz:** Dieser Ansatz hat dieselbe **asymptotische Komplexität** wie der ursprüngliche Algorithmus, ist aber praktisch schneller, da er weniger Vergleiche durchführt (kein i+1i+1i+1 oder i−1i-1i−1).
 
 # 4 Asymptotische Notation
 
@@ -139,11 +318,39 @@ Geben Sie fur jede der folgenden Funktionen an, in welcher asymptotischen Klass
 ![[98_ESAundProklausur/image/Pasted image 20250120102659.png]]
 
 
+![[98_ESAundProklausur/image/Pasted image 20250127010655.png]]
+
+
+![[98_ESAundProklausur/image/Pasted image 20250127010703.png]]
+
+
+![[98_ESAundProklausur/image/Pasted image 20250127010711.png]]
+
+![[98_ESAundProklausur/image/Pasted image 20250127010720.png]]
+
+![[98_ESAundProklausur/image/Pasted image 20250127010730.png]]
+
+
+
 # 5 Rekursiver Algorithmus
+
+![[98_ESAundProklausur/image/Pasted image 20250127014034.png]]
 
 a) Stellen Sie die Rekursionsgleichung zur Bestimmung der Zeitkomplexität des Algorithmus Re-kAlg6 in Abhängigkeit von der Eingabegrösse auf und geben Sie an, welches die für die Zeitkomplexität relevante Eingabegröße ist. (Vernachlassigen Sie dabei die Gaussklammern.)
 
+Eingabegröße =n 
+
+T(n) = 1 , falls n =1 
+
+b =5 , c =2, f(n) = n^2
+
+
 (b) Bestimmen Sie die Zeitkomplexität des Algorithmus RekAlg6.
+
+k =2 
+b(1/c)^k =   5/4 > 1
+
+a= ln5/ ln 2 
 
 
 # 6 Min-Heap
