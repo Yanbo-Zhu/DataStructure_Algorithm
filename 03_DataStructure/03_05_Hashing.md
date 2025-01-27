@@ -309,6 +309,12 @@ Vorsicht beim Löschen von Elementen!
 • aber logisch gelöschte Elemente können wieder beschrieben werden
 
 
+Sind Elemente aus der Hashtabelle zu löschen, so dürfen diese nicht wieder mit <scshape> nil </scs
+ha e> belegt werden. 
+Die Plätze Sind nur als gelöscht zu markieren, da sonst die Kollisionsketten unterbrochen werden würden. 
+Ein freier Platz kennzeichnet das Ende einer Kollisionskette und dahinter liegende Elemente würden nicht mehr gefunden werden. 
+Als gelöscht markierte Plätze dürfen wieder besetzt werden.
+
 ## 7.3 Übung
 
 • Sortieren Sie folgende Schlüssel ein (der Einfachheit halber sind Keys auch Values): 1, 5, 7, 3, 4

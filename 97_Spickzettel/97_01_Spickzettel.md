@@ -731,15 +731,29 @@ Multiplikationsmethode
 当一个 key 的 hash value 要组成一个 key kette 了, 组成一个 kette , 会增加查找难度,.  为了避免这个问题
 需要 finde ich einen freien Platz in dieser Tabelle, 将这个key 存在 tablle 里  这个新的问题 , 这个就是 offene addressierung
 
-## 12.4 Linear Sondierungen
+### 12.3.1 Linear Sondierungen
 
 ![[03_DataStructure/image/Pasted image 20250126221807.png]]
 
 通过 加 I 的方式 将 key 的 in table 的储存位置 mit offset manchen
 
 
+### 12.3.2 Löschen
 
-## 12.5 Chaining vs. Offene Adressierung
+
+Vorsicht beim Löschen von Elementen!
+• nur Markieren, d.h. nur logisch löschen, da sonst die Kollisionskette unterbrochen wäre
+• aber logisch gelöschte Elemente können wieder beschrieben werden
+
+
+Sind Elemente aus der Hashtabelle zu löschen, so dürfen diese nicht wieder mit <scshape> nil </scs
+ha e> belegt werden. 
+Die Plätze Sind nur als gelöscht zu markieren, da sonst die Kollisionsketten unterbrochen werden würden. 
+Ein freier Platz kennzeichnet das Ende einer Kollisionskette und dahinter liegende Elemente würden nicht mehr gefunden werden. 
+Als gelöscht markierte Plätze dürfen wieder besetzt werden.
+
+
+## 12.4 Chaining vs. Offene Adressierung
 
 Offene addressierung
 152 处 先 存好 john smith
@@ -761,7 +775,7 @@ Offene Adressierung
 
 
 
-## 12.6 Array Doubling
+## 12.5 Array Doubling
 
 wenn die Kapazität erschöpft ist
 Dann verdoppelt die grosse von Array

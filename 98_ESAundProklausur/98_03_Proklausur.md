@@ -317,6 +317,8 @@ Geben Sie fur jede der folgenden Funktionen an, in welcher asymptotischen Klass
 
 ![[98_ESAundProklausur/image/Pasted image 20250120102659.png]]
 
+![[98_ESAundProklausur/image/Pasted image 20250127162316.png]]
+
 
 ![[98_ESAundProklausur/image/Pasted image 20250127010655.png]]
 
@@ -359,26 +361,73 @@ Ein Feld von paarweise verschiedenen Schlüsseln ist mit dem Algorithmus Heapsor
 
 ![[98_ESAundProklausur/image/Pasted image 20250120103438.png]]
 
+![[98_ESAundProklausur/image/Pasted image 20250127162402.png]]
+
 (a) Wie viele Schlüsselvergleiche sind in der Heap-Konstruktions-Phase (Algorithmus Build-Min-Heap) für A durchzuführen?
+
+6 Male 
+
+
+---
+
 (b) Geben Sie das Feld A nach der Heap-Konstruktions-Phase an.
+
+A = `[1, 3, 2,6,5,5,7,8 ]`
+
+
+---
+
 (c) Ist ein aufsteigend sortiertes Feld ein bester Fall, schlechtester Fall oder mittlerer Fall für den Algorithmus Build-Min-Heap? Wie ist die gegebene Eingabe im Vergleich einzuschätzen?
 Begründen Sie Ihre Antwort.
+
+Ist für einen **Build-Min-Heap**-Algorithmus ein **bester Fall**, da die Elemente bereits so angeordnet sind, dass weniger Änderungen nötig sind, um die Min-Heap-Eigenschaft zu erfüllen.
+
+---
+
 (d) Welche Höhe hat ein Min-Heap, der n Elemente enthält? Geben Sie die Höhe exakt als Funktion von n an. Welche Höhe hat demzufolge der oben konstruierte Heap des Feldes A (Hinweis: Ein Heap mit n = 1 hat die Höhe h = 0)?
+
+h = log_2(n)
+
+Die hohe von A = log_2(8) = 3
+
+
+
 
 
 # 7 Hashing
 
-Betrachte eine Hashtabelle `T[0..11]` mit offener Adressierung und einer Hashfunktion mit linearer Sondierung, i = 0, 1, 2, . . . . 
+Betrachte eine Hashtabelle `T[0..11]` mit offener Adressierung und einer Hashfunktion mit linearer Sondierung, `i = 0, 1, 2, . . . . `
 Die in die Hashtabelle einzutragenden Datensätze bestehen nur aus den Schlüsseln $k \in N$ 
 
 ![[98_ESAundProklausur/image/Pasted image 20250120104116.png]]
 
 Die Hashtabelle ist initial leer.
 (a) Fügen Sie in dieser Reihenfolge die Schlüssel 1, 5, 12, 4, 10, 3 ein. Wo werden diese Schlüssel in der Hashtabelle T eingefügt?
-(b) Löschen Sie den Schlüssel 1 in der Hashtabelle. Wie wird der entsprechende Eintrag in der Hashtabelle verändert? Begründung in eigenen Worten!
-(c) Handelt es sich bei der gegebenen Hashfunktion h' um eine gute Hashfunktion? Begründung in eigenen Worten!
 
 ![[98_ESAundProklausur/image/Pasted image 20250120104701.png]]
+
+![[98_ESAundProklausur/image/Pasted image 20250127162424.png]]
+
+---
+
+
+
+(b) Löschen Sie den Schlüssel 1 in der Hashtabelle. Wie wird der entsprechende Eintrag in der Hashtabelle verändert? Begründung in eigenen Worten!
+
+Die Plätze Sind nur mit ""-1 als gelöscht zu markieren, da sonst die Kollisionsketten unterbrochen werden würden. 
+
+
+
+
+
+(c) Handelt es sich bei der gegebenen Hashfunktion h' um eine gute Hashfunktion? Begründung in eigenen Worten!
+
+Die Hashfunktion h′(k)h'(k)h′(k) ist keine gute Hashfunktion, weil:
+- Sie nicht alle Slots in der Hashtabelle gleichmäßig nutzt, sondern nur ein Drittel (0, 4, 8).
+- Dies zu einer hohen Anzahl an Kollisionen führt, wodurch die Effizienz des Hashing-Verfahrens (besonders bei offenen Adressierungen) erheblich beeinträchtigt wird.
+- Die eingeschränkte Verteilung der Werte (bedingt durch 4kmod  12) auf strukturellen Eigenschaften der Funktion basiert und nicht zufällig ist.
+
+
 
 
 
