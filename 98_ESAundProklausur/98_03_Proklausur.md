@@ -15,13 +15,16 @@ a) Ist fur die Ausfuehrung eines Algorithmus folgendes erforderlich? Erlaeutern 
 - **Erforderlich?** Nein.
 - **Erläuterung:** Algorithmen sind abstrakte Konzepte und können unabhängig von einem Computer existieren. Sie können auch von Menschen "ausgeführt" werden, z. B. durch manuelles Berechnen. Allerdings wird ein Computer benötigt, wenn der Algorithmus automatisiert oder effizient auf großen Datenmengen ausgeführt werden soll.
 
+
 **Programm:**
 - **Erforderlich?** Nein.
 - **Erläuterung:** Ein Algorithmus ist eine präzise Folge von Anweisungen und kann in natürlicher Sprache, Pseudocode oder Diagrammen dargestellt werden. Ein Programm ist lediglich eine Möglichkeit, einen Algorithmus in einer für Maschinen verständlichen Form (z. B. in einer Programmiersprache) umzusetzen.
 
+
 **Eingabe:**
 - **Erforderlich?** Ja, meistens.
 - **Erläuterung:** Die meisten Algorithmen benötigen Eingaben, um eine sinnvolle Ausgabe zu erzeugen. Es gibt jedoch Algorithmen (z. B. Konstantberechnungen oder Simulationen), die ohne externe Eingaben funktionieren, indem sie mit festen Werten arbeiten.
+
 
 **Ausgabe:**
 - **Erforderlich?** Nein, aber üblich.
@@ -39,13 +42,16 @@ Das **"Raten einer Permutation"** beschreibt eine naive und extrem ineffiziente 
 
 "Sortieren durch Raten einer Permutation" bedeutet, alle möglichen Permutationen der gegebenen Liste zu generieren und zu prüfen, welche Permutation die geordnete (sortierte) Version der Liste ist.
 
+
 **Laufzeitkomplexität:**
 - Die Anzahl der Permutationen einer Liste mit n Elementen beträgt n!n!n! (Fakultät von nnn).
 - Das Prüfen jeder Permutation, um festzustellen, ob sie sortiert ist, dauert O(n).
 - Die Gesamtzeitkomplexität ist daher O(n⋅n!), was extrem ineffizient ist.
 
+
 **Vergleich mit effizienten Algorithmen:**
 - Effiziente Sortieralgorithmen wie Quicksort, Mergesort oder Heapsort haben eine Zeitkomplexität von O(nlog⁡n), was für große n viel schneller ist als n!.
+
 
 **Ablauf:**
 1. **Generiere alle Permutationen:**
