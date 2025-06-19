@@ -1,0 +1,652 @@
+https://blog.csdn.net/Sparkle_007/article/details/54971257
+
+
+# 1 总览
+
+线性表查找
+树结构查找
+散列表查找
+
+
+|            |         |             |                                                                                                                                |
+| ---------- | ------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| 查找         | 平均时间复杂度 | 查找条件        | 算法描述                                                                                                                           |
+| 顺序查找       | O(n)    | 无序或有序队列     | 按顺序比较每个元素，直到找到关键字为止                                                                                                            |
+| 二分查找（折半查找） | O(logn) | 有序数组        | 查找过程从数组的中间元素开始，如果中间元素正好是要查找的元素，则搜素过程结束；如果某一特定元素大于或者小于中间元素，则在数组大于或小于中间元素的那一半中查找，而且跟开始一样从中间元素开始比较。　如果在某一步骤数组为空，则代表找不到。           |
+| 二叉排序树查找    | O(logn) | 二叉排序树       | 在二叉查找树b中查找x的过程为：  <br>1. 若b是空树，则搜索失败  <br>2. 若x等于b的根节点的数据域之值，则查找成功；  <br>3. 若x小于b的根节点的数据域之值，则搜索左子树  <br>4. 查找右子树。              |
+| 哈希表法（散列表）  | O(1)    | 先创建哈希表（散列表） | 根据键值方式(Key value)进行查找，通过散列函数，定位数据元素。                                                                                           |
+| 分块查找       | O(logn) | 无序或有序队列     | 将n个数据元素"按块有序"划分为m块（m ≤ n）。每一块中的结点不必有序，但块与块之间必须"按块有序"；即第1块中任一元素的关键字都必须小于第2块中任一元素的关键字；而第2块中任一元素又都必须小于第3块中的任一元素，……。然后使用二分查找及顺序查找。 |
+
+|   |   |
+|---|---|
+|**查找算法的名称**|**时间复杂度（大O表示法）**|
+|顺序查找算法|O(n)|
+|二分查找算法|O(log n)|
+|插补查找算法|O(log log n)|
+|分块查找算法|O(log以2为底m的对数+N/m)|
+|斐波拉契查找算法|O(log 2n)|
+|哈希查找算法|O(1)|
+
+
+- 顺序查找算法：按照数据的顺序一项一项逐个查找，所以不管数据顺序如何，都要从头到尾的遍历一次。速度比较慢，它的时间复杂度是 T=O(n)。
+- 二分查找算法：将数据分割成两等份，然后用键值(要查找的数据)与中间值进行比较，逐个缩小查找范围。速度比顺序查找快，它的时间复杂度是 T=O(log n)。
+- 插补查找算法：按照数据的分布，利用公式预测键值所在的位置，快速缩小键值所在序列的范围，慢慢逼近，知道查找到数据为止，这中算法比二分法查找速度还快，它的时间复杂度为 T=O(log log(n))。
+- 分块查找算法：要求是顺序表，它是顺序查找算法的一种改进方法，它的时间复杂度是 T=O(log以2为底m的对数+N/m)。
+- 斐波拉契查找算法：斐波拉契查找算法就是在二分法的基础上根据斐波拉契数据进行分割。用键值(想要查找的数据)与黄金分割点进行比较。逐渐缩小查找范围。它的时间复杂度是 T=O(log 2n)。
+- 哈希查找算法：把一些复杂的数据，通过某种函数映射关系，映射成更加易于查找的方式。这种方法速度最快，它的时间复杂度是 T=O(1)。
+
+
+
+# 2 二分查找 
+
+```
+/**
+ * 基本二分查找算法
+ */
+int binarySearch(int a[], int n, int t)
+{
+    int l = 0, u = n - 1;
+    while (l <= u) {
+        int m = l + (u - l) / 2; // 同（l+u）/ 2，这里是为了防溢出
+        if (t > a[m])
+            l = m + 1;
+        else if (t < a[m])
+            u = m - 1;
+        else
+            return m;
+    }
+    return -(l+1);
+}
+```
+
+
+算法的思想就是：从数组中间开始，每次排除一半的数据，时间复杂度为O(lgN)。这依赖于数组有序这个性质。
+如果t存在数组中，则返回t在数组的位置；否则，不存在则返回-(l+1)。
+
+这里需要解释下为什么t不存在数组中时不是返回-1而要返回-(l+1)。首先我们可以观察 l 的值，如果查找不成功，则 l 的值恰好是 t 应该在数组中插入的位置。
+
+举个例子，假定有序数组a={1, 3, 4, 7, 8}， 那么
+- 如果t=0，则显然t不在数组中，则二分查找算法最终会使得l=0 > u=-1退出循环；
+- 如果t=9，则t也不在数组中，则最后l=5 > u=4退出循环。
+- 如果t=5，则最后l=3 > u=2退出循环。
+
+因此在一些算法中，比如DHT（一致性哈希）中，就需要这个返回值来使得新加入的节点可以插入到合适的位置中，在求最长递增子序列的NlgN算法中，也用到了这一点，参见: http://blog.csdn.net/ssjhust123/article/details/7798737
+
+
+还有一个小点就是之所以返回-(l+1)而不是直接返回 -l 是因为 l 可能为0，如果直接返回 -l 就无法判断是正常返回位置0还是查找不成功返回的0。
+
+
+```python
+def binary_search(a, n, t):
+    l = 0
+    u = n - 1
+    while l <= u:
+        m = l + (u - l) // 2  # Equivalent to (l + u) // 2, but safer for large l and u. This formula avoids potential overflow that could occur with `(l + u) // 2` when `l` and `u` are large.
+        if t > a[m]:
+            l = m + 1
+        elif t < a[m]:
+            u = m - 1
+        else:
+            return m
+    return -(l + 1)
+
+# Example usage:
+if __name__ == "__main__":
+    a = [1, 3, 5, 7, 9]
+    target = 5
+    index = binary_search(a, len(a), target)
+    print("Index of target is:", index)  # Output should be 2
+```
+
+
+**`binary_search(a, n, t)` Function**:
+
+- **Initialization**:
+    - `l` (lower bound) is initialized to 0.
+    - `u` (upper bound) is initialized to `n - 1`.
+- **While Loop**:
+    - The loop continues as long as the lower bound `l` is less than or equal to the upper bound `u`.
+    - The middle index `m` is calculated using `m = l + (u - l) // 2`. This formula avoids potential overflow that could occur with `(l + u) // 2` when `l` and `u` are large.
+    - The target `t` is compared with the middle element `a[m]`:
+        - If `t` is greater than `a[m]`, the search space is reduced to the right half (`l = m + 1`).
+        - If `t` is less than `a[m]`, the search space is reduced to the left half (`u = m - 1`).
+        - If `t` is equal to `a[m]`, the function returns the index `m`.
+- **If Not Found**:
+    - If the target `t` is not found in the array, the function returns `-(l + 1)`. This value can be used to determine the insertion point for `t` if the array should remain sorted.
+
+
+
+## 2.1 查找有序数组中数字第一次出现位置
+
+现在考虑一个稍微复杂点的问题，如果有序数组中有重复数字，比如数组a={1, 2, 3, 3, 5, 7, 8}，需要在其中找出3第一次出现的位置。这里3第一次出现位置为2。这个问题在《编程珠玑》第九章有很好的分析，这里就直接用了。
+
+算法的精髓在于循环不变式的巧妙设计，代码如下：
+
+Python version
+```python 
+def binary_search_first(a, t):
+    l, u = -1, len(a)
+    while l + 1 != u:
+        # Loop invariant: a[l] < t <= a[u] and l < u
+        m = l + (u - l) // 2  # Same as (l + u) // 2
+        if t > a[m]:
+            l = m
+        else:
+            u = m
+
+    # At this point, l + 1 == u and a[l] < t <= a[u]
+    p = u
+    if p >= len(a) or a[p] != t:
+        p = -1
+
+    return p
+
+# Example usage:
+if __name__ == "__main__":
+    a = [1, 2, 2, 2, 3, 4, 5]
+    t = 2
+    index = binary_search_first(a, t)
+    print(index)  # Output should be 1, as 2 first appears at index 1
+```
+
+算法分析：设定两个不存在的元素a[-1]和a[n]，使得a[-1] < t <= a[n]，但是我们并不会去访问这两个元素，因为(l+u)/2 > l=-1, (l+u)/2 < u=n。
+循环不变式为l<u && t>a[l] && t<=a[u] 。循环退出时必然有l+1=u, 而且a[l] < t <= a[u]。
+
+循环退出后u的值为t可能出现的位置，其范围为[0, n]，如果t在数组中，则第一个出现的位置p=u，如果不在，则设置p=-1返回。该算法的效率虽然解决了更为复杂的问题，但是其效率比初始版本的二分查找还要高，因为它在每次循环中只需要比较一次，前一程序则通常需要比较两次。
+
+举个例子：对于数组a={1, 2, 3, 3, 5, 7, 8}，我们
+- 如果查找t=3，则可以得到p=u=2，
+- 如果查找t=4，a[3]<t<=a[4]， p="-1。"" u="" style="font-size: inherit;color: inherit;line-height: inherit;">=n, 
+- 比如t=9，则u=7，此时也是设置p=-1.
+
+特别注意的是，l=-1，u=n这两个值不能写成l=0，u=n-1。虽然这两个值不会访问到，但是如果改成后面的那样，就会导致二分查找失败，那样就访问不到第一个数字。如在a={1，2，3，4，5}中查找1，如果初始设置l=0，u=n-1，则会导致查找失败。</t<=a[4]，>
+
+Explanation
+
+1. **Initialization**:
+    - `l = -1`: Initially, `l` is set to `-1`, meaning no valid index.
+    - `u = len(a)`: `u` is set to the length of the list, indicating that the upper boundary is initially outside the valid range of indices.
+    - The loop invariant `a[l] < t <= a[u]` is maintained throughout the loop.
+2. **Loop**:
+    - The loop continues as long as `l + 1` is not equal to `u`, ensuring that `l` and `u` are converging towards the target.
+    - `m = l + (u - l) // 2` computes the middle index.
+    - If `t > a[m]`, it means the target is in the upper half, so `l` is updated to `m`.
+    - Otherwise, the target is in the lower half or could be exactly at `m`, so `u` is updated to `m`.
+3. **Post-Loop**:
+    - After the loop, `l + 1 == u`, meaning `u` is the smallest index such that `a[u] >= t`.
+    - If `u` is within the array bounds and `a[u] == t`, `u` is the index of the first occurrence of `t`.
+    - If not, `p` is set to `-1`, indicating that `t` is not found in the list.
+4. **Return**:
+    
+    - The function returns the index `p` where the first occurrence of `t` is found or `-1` if `t` is not in the list.
+
+
+---
+
+C version 
+
+```c
+/**
+ * 二分查找第一次出现位置
+ */
+int binarySearchFirst(int a[], int n, int t)
+{
+    int l = -1, u = n;
+    while (l + 1 != u) {
+        /*循环不变式a[l]<t<=a[u] && l<u*/
+        int m = l + (u - l) / 2; //同（l+u）/ 2
+        if (t > a[m])
+            l = m;
+        else
+            u = m;
+    }
+    /*assert: l+1=u && a[l]<t<=a[u]*/
+    int p = u;
+    if (p>=n || a[p]!=t)
+        p = -1;
+    return p;
+}
+```
+
+
+## 2.2 查找数字在数组中最后出现的位置
+
+如果要查找数字在数组中最后出现的位置呢？其实这跟上述算法是类似的，稍微改一下上面的算法就可以了，代码如下：
+
+```python 
+def binary_search_last(a, t):
+    l, u = -1, len(a)
+    while l + 1 != u:
+        # Loop invariant: a[l] <= t < a[u]
+        m = l + (u - l) // 2
+        if t >= a[m]:
+            l = m
+        else:
+            u = m
+
+    # At this point, l + 1 = u and a[l] <= t < a[u]
+    p = l    # 只有这里和上面的不一样了
+    if p == -1 or a[p] != t:
+        p = -1
+
+    return p
+
+# Example usage:
+if __name__ == "__main__":
+    a = [1, 2, 2, 2, 3, 4, 5]
+    t = 2
+    index = binary_search_last(a, t)
+    print(index)  # Output should be 3, as 2 last appears at index 3
+```
+
+- **Initialization**:
+    - `l = -1`: `l` is initialized to `-1`, representing an invalid index.
+    - `u = len(a)`: `u` is initialized to the length of the list, representing an upper bound outside the valid index range.
+    - The loop invariant `a[l] <= t < a[u]` is maintained throughout the loop.
+- **Loop**:
+    - The loop runs as long as `l + 1` is not equal to `u`, ensuring that `l` and `u` are converging towards the target's last occurrence.
+    - `m = l + (u - l) // 2` computes the middle index.
+    - If `t >= a[m]`, it means the target is at or before `m`, so `l` is updated to `m`.
+    - Otherwise, if `t < a[m]`, the target is in the lower half, so `u` is updated to `m`.
+- **Post-Loop**:
+    - After the loop, `l + 1 == u`, and `a[l] <= t < a[u]`.
+    - `p = l` is the index of the last occurrence of `t` if `t` exists in the array.
+    - If `p == -1` or `a[p] != t`, it means `t` is not found, and `p` is set to `-1`.
+- **Return**:
+    - The function returns the index `p`, where the last occurrence of `t` is found, or `-1` if `t` is not in the list.
+
+
+
+```c
+/**
+ * 二分查找最后一次出现位置
+ */
+int binarySearchLast(int a[], int n, int t)
+{
+    int l = -1, u = n;
+    while (l + 1 != u) {
+        /*循环不变式, a[l] <= t < a[u]*/
+        int m = l + (u - l) / 2;
+        if (t >= a[m])
+            l = m;
+        else
+            u = m;
+    }
+    /*assert: l+1 = u && a[l] <= t < a[u]*/
+    int p = l;   /* 只有这里和上面的不一样了 */
+    if (p<=-1 || a[p]!=t)
+        p = -1;
+    return p;
+}
+```
+
+
+## 2.3 在同一个代码中查找数字在数组中最初和最后出现的位置
+
+当然还有一种方法可以将查询数字第一次出现和最后一次出现的代码写在一个程序中，只需要对原始的二分查找稍微修改即可，代码如下：
+
+```python
+def binary_search_first_and_last(a, t, first_flag):
+    l, u = 0, len(a) - 1
+    
+    while l <= u:
+        m = l + (u - l) // 2
+        
+        if a[m] == t:
+            if first_flag:  # Search for the first occurrence
+                if m != 0 and a[m - 1] != t:
+                    return m
+                elif m == 0:
+                    return 0
+                else:
+                    u = m - 1
+            else:  # Search for the last occurrence
+                if m != len(a) - 1 and a[m + 1] != t:
+                    return m
+                elif m == len(a) - 1:
+                    return len(a) - 1
+                else:
+                    l = m + 1
+        
+        elif a[m] < t:
+            l = m + 1
+        else:
+            u = m - 1
+
+    return -1
+
+# Example usage:
+if __name__ == "__main__":
+    a = [1, 2, 2, 2, 3, 4, 5]
+    t = 2
+    first_index = binary_search_first_and_last(a, t, True)
+    last_index = binary_search_first_and_last(a, t, False)
+    print(f"First occurrence of {t}: {first_index}")  # Output should be 1
+    print(f"Last occurrence of {t}: {last_index}")   # Output should be 3
+```
+
+1. **Initialization**:    
+    - `l = 0`: `l` is initialized to `0`, the start of the list.
+    - `u = len(a) - 1`: `u` is initialized to the last index of the list.
+2. **Loop**:
+    - The loop continues as long as `l <= u`, which ensures that there are elements left to search.
+    - `m = l + (u - l) // 2` calculates the middle index of the current search range.
+3. **Conditions**:
+    - **`if a[m] == t`**: If the middle element is equal to `t`, we then check whether we are looking for the first or last occurrence.
+        - **First Occurrence (`first_flag = True`)**:
+            - If `m` is not the first index (`m != 0`) and the element before `m` is not equal to `t` (`a[m - 1] != t`), then `m` is the first occurrence.
+            - If `m` is `0`, then it's the first element, so `m = 0` is returned.
+            - Otherwise, adjust the upper boundary `u` to `m - 1` to continue searching in the left half.
+        - **Last Occurrence (`first_flag = False`)**:
+            - If `m` is not the last index (`m != len(a) - 1`) and the element after `m` is not equal to `t` (`a[m + 1] != t`), then `m` is the last occurrence.
+            - If `m` is the last element, return `m = len(a) - 1`.
+            - Otherwise, adjust the lower boundary `l` to `m + 1` to continue searching in the right half.
+    - **`elif a[m] < t`**: If the middle element is less than `t`, adjust the lower boundary `l` to `m + 1`.
+    - **`else`**: If the middle element is greater than `t`, adjust the upper boundary `u` to `m - 1`.
+4. **Return**:
+    - If the loop exits without finding `t`, return `-1` indicating `t` is not in the list.
+
+
+- In the given sorted list `a = [1, 2, 2, 2, 3, 4, 5]`, the function `binary_search_first_and_last` will:
+    - Return `1` for the first occurrence of `2`.
+    - Return `3` for the last occurrence of `2`.
+
+
+---
+
+```c
+/**
+ * 二分查找第一次和最后一次出现位置
+ */
+int binarySearchFirstAndLast(int a[], int n, int t, int firstFlag)
+{
+    int l = 0;
+    int u = n - 1;
+    while(l <= u) {
+        int m = l + (u - l) / 2;
+        if(a[m] == t) { //找到了，判断是第一次出现还是最后一次出现
+            if(firstFlag) { //查询第一次出现的位置
+                if(m != 0 && a[m-1] != t)
+                    return m;
+                else if(m == 0)
+                    return 0;
+                else
+                    u = m - 1;
+            } else {   //查询最后一次出现的位置
+                if(m != n-1 && a[m+1] != t)
+                    return m;
+                else if(m == n-1)
+                    return n-1;
+                else
+                    l = m + 1;
+            }
+        }
+        else if(a[m] < t)
+            l = m + 1;
+        else
+            u = m - 1;
+    }
+
+    return -1;
+}
+```
+
+
+## 2.4 旋转数组元素查找问题
+
+
+把一个有序数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。例如数组{3, 4, 5, 1, 2}为{1, 2, 3, 4, 5}的一个旋转。
+现在给出旋转后的数组和一个我们想查找的数，但是我们不知道 旋转了多少位不知道，要求给出一个算法，算出给出的想要查找的数 在 旋转后的数组 中的下标，如果没有找到这个数，则返回-1。要求查找次数不能超过n。
+
+由题目可以知道，旋转后的数组虽然整体无序了，但是其前后两部分是部分有序的。由此还是可以使用二分查找来解决该问题的。
+
+
+
+### 2.4.1 两次二分查找
+
+首先确定数组分割点，也就是说分割点两边的数组都有序。比如例子中的数组以位置2分割，前面部分{3,4,5}有序，后半部分{1,2}有序。然后对这两部分分别使用二分查找即可。代码如下：
+
+```python 
+def find_rotate_position(a):
+    for i in range(len(a) - 1):
+        if a[i + 1] < a[i]:
+            return i
+    return -1
+
+def binary_search_first(a, t):
+    l, u = 0, len(a) - 1
+    while l <= u:
+        m = l + (u - l) // 2
+        if a[m] == t:
+            if m == 0 or a[m - 1] != t:
+                return m
+            else:
+                u = m - 1
+        elif a[m] < t:
+            l = m + 1
+        else:
+            u = m - 1
+    return -1
+
+def binary_search_rotate_twice(a, t):
+    p = find_rotate_position(a)  # Find the rotation position
+    if p == -1:
+        return binary_search_first(a, t)  # Array is sorted, search directly
+
+    left = binary_search_first(a[:p+1], t)  # Search in the left part
+    if left != -1:
+        return left  # Found in the left part, return it
+
+    right = binary_search_first(a[p+1:], t)  # Search in the right part
+    if right == -1:
+        return -1
+
+    return right + p + 1  # Adjust the index for the right part
+
+# Example usage:
+if __name__ == "__main__":
+    a = [4, 5, 6, 7, 0, 1, 2]
+    t = 0
+    index = binary_search_rotate_twice(a, t)
+    print(f"Index of {t}: {index}")  # Output should be 4
+```
+
+- **`find_rotate_position(a)`**:
+    - This function iterates through the array `a` to find the point where the array is rotated. This is where an element is greater than its next element.
+    - It returns the index `i` where this occurs, or `-1` if the array is not rotated.
+- **`binary_search_first(a, t)`**:
+    - This is a standard binary search function to find the first occurrence of `t` in a sorted list `a`.
+    - It returns the index of the first occurrence of `t` or `-1` if `t` is not found.
+- **`binary_search_rotate_twice(a, t)`**:
+    - First, it finds the rotation position `p` using `find_rotate_position(a)`.
+    - If `p == -1`, meaning the array is not rotated, it directly performs a binary search on the whole array.
+    - If the array is rotated, it first searches the left part of the array (from start to the rotation point).
+    - If not found in the left part, it searches the right part (from the rotation point to the end).
+    - If found in the right part, it adjusts the index by adding `p + 1` to account for the rotation.
+
+---
+
+C verion: 
+
+```c
+
+/**
+ * 旋转数组查找-两次二分查找
+ */
+int binarySearchRotateTwice(int a[], int n, int t)
+{
+    int p = findRotatePosition(a, n); //找到旋转位置
+    if (p == -1)
+        return binarySearchFirst(a, n, t); //如果原数组有序，则直接二分查找即可
+
+    int left = binarySearchFirst(a, p+1, t); //查找左半部分
+    if (left != -1)
+        return left; //左半部分找到，则直接返回
+
+    int right = binarySearchFirst(a+p+1, n-p-1, t); //左半部分没有找到，则查找右半部分
+    if (right == -1)
+        return -1;
+
+    return right+p+1;  //返回位置，注意要加上p+1
+}
+
+/**
+ * 查找旋转位置
+ */
+int findRotatePosition(int a[], int n)
+{
+    int i;
+    for (i = 0; i < n-1; i++) {
+        if (a[i+1] < a[i])
+            return i;
+    }
+    return -1;
+}
+
+
+```
+
+# 3 一次二分查找 
+
+例如数组{3, 4, 5, 1, 2}为{1, 2, 3, 4, 5}的一个旋转
+
+二分查找算法有两个关键点：1）数组有序；2）根据当前区间的中间元素与t的大小关系，确定下次二分查找在前半段区间还是后半段区间进行。
+
+仔细分析该问题，可以发现，每次根据 l 和 u 求出 m 后，m 左边（[l, m]）和右边（[m, u]）至少一个是有序的。a[m]分别与a[l]和a[u]比较，确定哪一段是有序的。
+- 如果左边是有序的，若 `t<a[m] && t>a[l]`, 则 u=m-1；其他情况，l =m+1；
+- 如果右边是有序的，若 `t> a[m] && t<a[u]` 则 l=m+1；其他情况，u =m-1；
+
+```python
+def binary_search_rotate_once(a, t):
+    l, u = 0, len(a) - 1
+    
+    while l <= u:
+        m = l + (u - l) // 2
+        if a[m] == t:
+            return m
+        
+        if a[m] >= a[l]:  # Left half is sorted
+            if a[l] <= t < a[m]:
+                u = m - 1
+            else:
+                l = m + 1
+        else:  # Right half is sorted
+            if a[m] < t <= a[u]:
+                l = m + 1
+            else:
+                u = m - 1
+    
+    return -1
+
+# Example usage:
+if __name__ == "__main__":
+    a = [4, 5, 6, 7, 0, 1, 2]
+    t = 0
+    index = binary_search_rotate_once(a, t)
+    print(f"Index of {t}: {index}")  # Output should be 4
+```
+
+
+- **Initialization**:
+    - `l` and `u` are initialized to the start and end of the array, respectively (`l = 0`, `u = len(a) - 1`).
+- **Loop**:
+    - The loop continues as long as `l <= u`.
+    - The middle index `m` is calculated as `m = l + (u - l) // 2`.
+- **Check for Target**:
+    - If `a[m] == t`, the function returns `m` because the target has been found.
+- **Determine Which Half is Sorted**:
+    - **Left Half Sorted (`a[m] >= a[l]`)**:
+        - If the left half of the array (`a[l]` to `a[m]`) is sorted, check if `t` is within this range.
+        - If `t` is in the range (`a[l] <= t < a[m]`), search in the left half by setting `u = m - 1`.
+        - Otherwise, search in the right half by setting `l = m + 1`.
+    - **Right Half Sorted**:
+        - If the right half (`a[m]` to `a[u]`) is sorted, check if `t` is within this range.
+        - If `t` is in the range (`a[m] < t <= a[u]`), search in the right half by setting `l = m + 1`.
+        - Otherwise, search in the left half by setting `u = m - 1`.
+- **Return**:
+    - If the loop exits without finding `t`, return `-1` to indicate that `t` is not in the array.
+
+
+
+---
+ C version
+
+```C
+/**
+ * 旋转数组二分查找-一次二分查找
+ */
+int binarySearchRotateOnce(int a[], int n, int t)
+{
+    int l = 0, u = n-1;
+    while (l <= u) {
+        int m = l + (u-l) / 2;
+        if (t == a[m])
+            return m;
+        if (a[m] >= a[l]) { //数组左半有序
+            if (t >= a[l] && t < a[m])
+                u = m - 1;
+            else
+                l = m + 1;
+        } else {       //数组右半段有序
+            if (t > a[m] && t <= a[u])
+                l = m + 1;
+            else
+                u = m - 1;
+        }   
+    }   
+    return -1; 
+}
+```
+
+
+
+# 4 Sequentielle Suche
+
+
+wenn keine weiteren Annahmen über Eingabe, dann muss jeder Eintrag potentiell überprüft werden
+
+![[04_Algorithm/image/Pasted image 20250125195959.png]]
+
+![[04_Algorithm/image/Pasted image 20250125200017.png]]
+
+
+![[04_Algorithm/image/Pasted image 20250125200039.png]]
+
+一个 interval  从 1 到 m (step 为1), 从里面查找n .  需要通过 1 ( 第一个数就是要找的n ) or 2 ( 第二个数就是要找的n ) or 3 or 4 or n 次比较   找到了n.    而且每个数 element 本身在 list A 中出现的概率是 1/m .  则 可以得到 能够在数组中找到 n 这个数据的凭据概率为  1/m * (1+2+…+ n)
+
+一个 interval  从 1 到 m (step 为1), 从里面查找n .    通过比较了 n 次, 确定在 这个 list A 不包含 这个 n值.    list A  中每个 element 不为 n 的概率为  (m- n) /m  . 在查找过程中一共比较了n次
+
+![[04_Algorithm/image/Pasted image 20250125200107.png]]
+
+
+## 4.1 Sequentielle Suche Zeitkomplizität 
+
+Daten unsortiert: optimal  $\Theta(n)$
+Daten sortiert: nicht optimal, dann binäre Suche optimal $\Theta(log n)$
+
+
+
+
+## 4.2 Sequentielle Suche im Sortierte Array 
+
+
+![[04_Algorithm/image/Pasted image 20250125200433.png]]
+
+
+
+## 4.3 Binäre Suche
+
+从中间开始搜 
+
+• sequentielles Suchen in sortierter Liste ignoriert Sortierungseigenschaft
+• Wie Sortierung ausnutzen?
+• sortierte Liste macht Suchrichtung bestimmbar:
+- untersuchtes Element zu klein, suche in Richtung größerer Elemente
+- untersuchtes Element zu groß, suche in Richtung kleinerer Elemente
+- Und wo am besten anfangen? In der Mitte!
+(am Rand anfangen wäre wieder wie sequentielle Suche)
+
+![[04_Algorithm/image/Pasted image 20250125200718.png]]
+
+
+
