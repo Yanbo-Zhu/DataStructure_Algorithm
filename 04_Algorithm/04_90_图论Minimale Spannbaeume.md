@@ -16,6 +16,9 @@
 # 2 Union Find 
 
 
+---
+
+
 ![](image/Pasted%20image%2020250619122157.png)
 
 
@@ -33,8 +36,31 @@
 ![](image/Pasted%20image%2020250619122627.png)
 
 
+## 2.1 Union-Find Funktion 
 
-## 2.1 Union Find Simlution 
+![[04_Algorithm/image/Pasted image 20250625111711.png]]
+
+
+![[04_Algorithm/image/Pasted image 20250625111744.png]]
+
+Wie ist Representative identifiziert?: 
+kleinste Element 
+
+
+
+
+
+![[04_Algorithm/image/Pasted image 20250625111809.png]]
+
+
+
+
+
+
+
+
+
+## 2.2 Union Find Simlution 
 
 ![](image/Pasted%20image%2020250619122715.png)
 
@@ -51,7 +77,7 @@ C klasse 的 Reprasentant 为3   value
 
 
 
-## 2.2 Implementation von Union 
+## 2.3 Implementation von Union 
 
 ![](image/Pasted%20image%2020250619123109.png)
 
@@ -86,6 +112,14 @@ Richtige Implementation von Union
 
 
 # 3 Minimale Spinnbaum 
+
+
+
+![[04_Algorithm/image/Pasted image 20250625104318.png]]
+
+
+![[04_Algorithm/image/Pasted image 20250625104353.png]]
+
 
 ![](image/Pasted%20image%2020250619123844.png)
 
@@ -124,6 +158,10 @@ Durchlaufe die Kanten nach aufsteigendem Gewicht. Füge eine Kante hinzu, wenn s
 
 
 ## 3.2 Prim Algorithmuss 
+
+
+![[04_Algorithm/image/Pasted image 20250625104433.png]]
+
 
 
 ![](image/Pasted%20image%2020250619124304.png)
@@ -166,7 +204,185 @@ start punkte ganz links
 
 alle konto 已经被找到， 结束搜索了 
 
+
+
+
+
+### 3.2.2 Prims' Algorithmus Beispiel 
+
+
+![[04_Algorithm/image/Pasted image 20250625104521.png]]
+
+
+Um **Prim’s Algorithmus** auf den gegebenen gewichteten, ungerichteten Graphen anzuwenden, wählen wir einen Startknoten (z. B. **A**) und bauen schrittweise den **Minimalen Spannbaum (MST)** auf, indem wir **immer die günstigste Kante** (mit dem kleinsten Gewicht) zu einem noch nicht besuchten Knoten hinzufügen.
+
+
+
+Prim’s Algorithmus Schritt für Schritt (Start bei **A**):
+
+MST-Knoten: {A}
+
+Mögliche Kanten: A—B(11)  
+➡️ **Wähle A—B(11)**  
+→ Neuer Knoten: B  
+→ MST-Kanten: [A—B]
+
+
+
+MST-Knoten: {A, B}
+
+Mögliche Kanten:
+
+- B—C(3)
+    
+- B—D(14)  
+    ➡️ **Wähle B—C(3)**  
+    → Neuer Knoten: C  
+    → MST-Kanten: [A—B, B—C]
+    
+
+
+
+MST-Knoten: {A, B, C}
+
+Mögliche Kanten:
+
+- C—D(12)
+    
+- C—F(15)
+    
+- C—G(2)
+    
+- B—D(14)  
+    ➡️ **Wähle C—G(2)**  
+    → Neuer Knoten: G  
+    → MST-Kanten: [A—B, B—C, C—G]
+    
+
+
+
+MST-Knoten: {A, B, C, G}
+
+Mögliche Kanten:
+
+- G—F(9)
+    
+- G—H(10)
+    
+- G—E(6)
+    
+- C—D(12)
+    
+- C—F(15)  
+    ➡️ **Wähle G—E(6)**  
+    → Neuer Knoten: E  
+    → MST-Kanten: [A—B, B—C, C—G, G—E]
+    
+
+
+
+MST-Knoten: {A, B, C, G, E}
+
+Mögliche Kanten:
+
+- E—D(7)
+    
+- G—F(9)
+    
+- G—H(10)  
+    ➡️ **Wähle E—D(7)**  
+    → Neuer Knoten: D  
+    → MST-Kanten: [A—B, B—C, C—G, G—E, E—D]
+    
+
+
+
+MST-Knoten: {A, B, C, G, E, D}
+
+Mögliche Kanten:
+
+- G—F(9)
+    
+- G—H(10)
+    
+- D—C(12)  
+    ➡️ **Wähle G—F(9)**  
+    → Neuer Knoten: F  
+    → MST-Kanten: [A—B, B—C, C—G, G—E, E—D, G—F]
+    
+
+
+
+
+MST-Knoten: {A, B, C, G, E, D, F}
+
+Mögliche Kanten:
+
+- F—H(5)
+    
+- G—H(10)  
+    ➡️ **Wähle F—H(5)**  
+    → Neuer Knoten: H  
+    → MST-Kanten: [A—B, B—C, C—G, G—E, E—D, G—F, F—H]
+
+
+**Kanten im MST:**
+
+- A—B (11)
+    
+- B—C (3)
+    
+- C—G (2)
+    
+- G—E (6)
+    
+- E—D (7)
+    
+- G—F (9)
+    
+- F—H (5)
+    
+
+**Gesamtkosten:**  
+11 + 3 + 2 + 6 + 7 + 9 + 5 = **43**
+
+
+![[04_Algorithm/image/Pasted image 20250625105400.png]]
+
+
+
+### 3.2.3 Beispiel 3
+
+![[04_Algorithm/image/Pasted image 20250625105640.png]]
+
+![[04_Algorithm/image/Pasted image 20250625110211.png]]
+
+Minimum Spanning Tree (MST)  
+
+Key Notes:
+The algorithm always selects the smallest edge that connects a node in the MST to a node outside it.
+
+The MST is a subset of edges that connects all nodes with the minimal total weight and no cycles.
+
+The total weight of the MST in this case is 34.
+
+If the graph's edges were different from the assumed connections, the steps would adjust accordingly, but the methodology remains the same.
+
+==wenn alle nachbaren schon besucht , dann algo Search fur den Konte beendet und suche xx beim andern Konto ==
+
+![[04_Algorithm/image/Pasted image 20250625110550.png]]
+
+
+![[04_Algorithm/image/Pasted image 20250625110704.png]]
+
+
 ## 3.3 Kruskal Algorithmus 
+
+
+![[04_Algorithm/image/Pasted image 20250625112246.png]]
+
+![[04_Algorithm/image/Pasted image 20250625112309.png]]
+
 
 
 ![](image/Pasted%20image%2020250619125142.png)
@@ -216,6 +432,18 @@ falls es zwei kante mit 3 gibt ?   egal 随便先连接那两个
 
 
 ![](image/Pasted%20image%2020250619125922.png)
+
+### 3.3.2 Beispiel2 
+
+![[04_Algorithm/image/Pasted image 20250625112512.png]]
+
+
+
+![[04_Algorithm/image/Pasted image 20250625112854.png]]
+
+![[04_Algorithm/image/Pasted image 20250625113144.png]]
+
+
 
 # 4 Aufgabe 
 
