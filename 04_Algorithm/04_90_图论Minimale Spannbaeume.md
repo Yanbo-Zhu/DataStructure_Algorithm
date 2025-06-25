@@ -443,11 +443,15 @@ falls es zwei kante mit 3 gibt ?   egal 随便先连接那两个
 
 ![[04_Algorithm/image/Pasted image 20250625113144.png]]
 
+# 4 Reverse Delete
 
 
-# 4 Aufgabe 
 
-## 4.1 Aufgabe 3.1 
+
+
+# 5 Aufgabe 
+
+## 5.1 Aufgabe 3.1 
 
 ![](image/Pasted%20image%2020250619130203.png)
 
@@ -455,7 +459,7 @@ falls es zwei kante mit 3 gibt ?   egal 随便先连接那两个
 welche Algorithmus hier am Besten anpassen
 
 
-### 4.1.1 用 krukal ALgorithmus 
+### 5.1.1 用 krukal ALgorithmus 
 
 1
 ![](image/Pasted%20image%2020250619130447.png)
@@ -478,7 +482,7 @@ welche Algorithmus hier am Besten anpassen
 
 
 
-## 4.2 Aufgabe 3.2 
+## 5.2 Aufgabe 3.2 
 
 ![](image/Pasted%20image%2020250619130723.png)
 
@@ -505,11 +509,11 @@ oberschrank fur Y   . muss < 60    意味 下一步会使用 connect 两个 meng
 ![](image/Pasted%20image%2020250619131151.png)
 
 
-## 4.3 Aufgabe 3.3 
+## 5.3 Aufgabe 3.3 
 
 
 
-### 4.3.1 prim Simulation
+### 5.3.1 prim Simulation
 
 
 ![](image/Pasted%20image%2020250619131504.png)
@@ -531,7 +535,7 @@ oberschrank fur Y   . muss < 60    意味 下一步会使用 connect 两个 meng
 ![](image/Pasted%20image%2020250619131708.png)
 
 
-### 4.3.2 Kruskal Simulation 
+### 5.3.2 Kruskal Simulation 
 
 immer kleinest kante 
 
@@ -560,7 +564,7 @@ immer kleinest kante
 
 
 
-# 5 Quiz
+# 6 Quiz
 
 Kreuzen Sie für jeden der sechs Graphen an, ob die markierten Kanten nur durch den
 Prim Algorithmus, nur durch den Kruskal Algorithmus, durch beide oder durch keinen
@@ -698,10 +702,26 @@ prim: startkonte 可以是  in jedem markierten knoten
 
 
 
+## 6.1 Quiz 2 
+
+
+![[04_Algorithm/image/Pasted image 20250625113507.png]]
+
+
+lineke : 
+nur Prim oder keiner 
+prim: Prim mit Start in mitte
 
 
 
+Rechte: 
+![[04_Algorithm/image/Pasted image 20250625114143.png]]
 
+prim: 从 右边第二个点 
+![[04_Algorithm/image/Pasted image 20250625114830.png]]
+
+
+kruskal geht auch 
 
 
 
