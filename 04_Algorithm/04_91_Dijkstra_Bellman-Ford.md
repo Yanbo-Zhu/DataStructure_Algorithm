@@ -103,6 +103,45 @@ C → D       2
 
 
 
+# 4 Stak besetzen graph
+
+
+V: anzahl von konten 
+E : anzahl von kante 
+
+Stark bestezt Graph ?? 
+
+在**有向图**（Directed Graph）中，如果**任意两个节点 `u` 和 `v`** 都满足：
+> 从 `u` 有一条路径可以到达 `v`，同时从 `v` 也有一条路径可以到达 `u`，
+那么这个图就是一个 **强连通图（Strongly Connected Graph）**。
+
+
+
+O( (V+E)* logV )
+wenn jeden Konto mit 2 kante gibt 
+
+
+Disjktra laufzeit 
+O( E* logV )
+
+Bellman ford 
+O(V*logE)
+
+
+用 Disjktra 和 bellman ford 的方式去找 
+
+Disjktra funktioniert
+bellman ford   nicht funktionieren 
+![[04_Algorithm/image/23daab877c9b5bedaca37e03ec02878.jpg]]
+
+
+
+----
+
+Disjktra funktioniert
+bellman ford   nicht funktionieren 
+
+![[04_Algorithm/image/Pasted image 20250702125646.png]]
 
 
 
