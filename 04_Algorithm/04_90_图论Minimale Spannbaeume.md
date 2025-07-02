@@ -4,7 +4,32 @@
 ![](image/Pasted%20image%2020250619121612.png)
 
 
-# 1 Gewichtet Graph
+
+# 1 Spannbaum
+
+- Teilgraph eines Graphen, der ein Baum ist und alle Knoten enthält
+- Baum ist azyklisch und zusammenhängend
+- Spannbaum? Nein, nicht zu- sammenhängend
+	- Es kann also unter- schiedliche Spann- bäume für einen Graphen geben
+
+![[04_Algorithm/image/Pasted image 20250625221254.png]]
+
+# 2 Graph
+Was ist eigentlich ein Graph?
+• Tupel aus Knoten (Vertices, V) und Kanten (Edges, E)
+• Speicherung der Knoten recht simpel:
+	• V = {0,1,2,3}
+• Wie speichert man Kanten?
+	• Knotenpaare
+	• Adjazenzmatrix:
+	• Adjazenzlisten
+	• Doppelt verkettete Pfeilliste
+		• Wie Adjazenzliste, aber als Liste, statt als Array
+
+![[04_Algorithm/image/Pasted image 20250625221411.png]]
+
+
+# 3 Gewichtet Graph
 
 ![](image/Pasted%20image%2020250619121856.png)
 
@@ -12,9 +37,27 @@
 
 ![](image/Pasted%20image%2020250619121938.png)
 
+# 4 Äquivalenzrelation
 
-# 2 Union Find 
+- Objekte stehen zueinander in Beziehung
+- reflexiv: ein Objekt steht mit sich selbst in Beziehung
+- symmetrisch: Wenn A mit B in Beziehung → auch B mit A
+- transitiv: Wenn A mit B in Beziehung und B mit C → auch A mit C
+- Äquivalenzrelation teilt Menge in disjunkte Äquivalenzklassen
+	- ![[04_Algorithm/image/Pasted image 20250625221016.png]]
+- Auf Graphen
+	- ungerichtete Kante ist Äquivalenzrelation zwischen 2 Knoten
+	- Äquivalenzklassen werden Zusammenhangskomponenten genannt
 
+1 
+Beispiel: Wir definieren eine Äquivalenzrelation über geometrische Formen: „Zwei geometrische Formen sind äquivalent, wenn sie sich maximal nur durch Drehung und Skalierung unterscheiden.“
+
+![[04_Algorithm/image/Pasted image 20250625220957.png]]
+
+
+# 5 Union Find 
+
+Union Find: Datenstruktur, die Zusammenhangskomponenten speicher
 
 ![](image/Pasted%20image%2020250619122157.png)
 
@@ -28,13 +71,36 @@
 
 
 ---
-
+## 5.1 Union Find API 
 
 ![](image/Pasted%20image%2020250619122627.png)
 
 
+## 5.2 Union-Find Funktion 
 
-## 2.1 Union Find Simlution 
+![[04_Algorithm/image/Pasted image 20250625111711.png]]
+
+
+![[04_Algorithm/image/Pasted image 20250625111744.png]]
+
+Wie ist Representative identifiziert?: 
+kleinste Element 
+
+
+
+
+
+![[04_Algorithm/image/Pasted image 20250625111809.png]]
+
+
+
+
+
+
+
+
+
+## 5.3 Union Find Simlution 
 
 ![](image/Pasted%20image%2020250619122715.png)
 
@@ -51,7 +117,7 @@ C klasse 的 Reprasentant 为3   value
 
 
 
-## 2.2 Implementation von Union 
+## 5.4 Implementation von Union 
 
 ![](image/Pasted%20image%2020250619123109.png)
 
@@ -85,7 +151,15 @@ Richtige Implementation von Union
 ![](image/Pasted%20image%2020250619123608.png)
 
 
-# 3 Minimale Spinnbaum 
+# 6 Minimale Spinnbaum 
+
+Spannbaum mit minimaler Summe der Kantengewichte
+
+![[04_Algorithm/image/Pasted image 20250625104318.png]]
+
+
+![[04_Algorithm/image/Pasted image 20250625104353.png]]
+
 
 ![](image/Pasted%20image%2020250619123844.png)
 
@@ -104,7 +178,7 @@ Keinen zyklus
 s schnitte 向外的的 最小的 kante 
 
 
-## 3.1 Prim vs. Kruskal: Zusammenfassung
+## 6.1 Prim vs. Kruskal: Zusammenfassung
 
 Prims Algorithmus
 Bilde einen Baum ausgehend von einem Startknoten 𝑠. Füge iterativ eine der kreuzenden Kanten mit geringstem Gewicht hinzu.
@@ -123,7 +197,11 @@ Durchlaufe die Kanten nach aufsteigendem Gewicht. Füge eine Kante hinzu, wenn s
 
 
 
-## 3.2 Prim Algorithmuss 
+## 6.2 Prim Algorithmuss 
+
+
+![[04_Algorithm/image/Pasted image 20250625104433.png]]
+
 
 
 ![](image/Pasted%20image%2020250619124304.png)
@@ -131,7 +209,7 @@ Durchlaufe die Kanten nach aufsteigendem Gewicht. Füge eine Kante hinzu, wenn s
 ![](image/Pasted%20image%2020250619124450.png)
 
 
-### 3.2.1 Beispiel 
+### 6.2.1 Beispiel 
 总是找 最小的 kante  向外拓展   ， ==不一定一定要从最终的找以下个。 所哟已经的连接过的点的 的kante 中找一个 最小的权重的kante 作为以下各 knoten==
 
 
@@ -166,7 +244,185 @@ start punkte ganz links
 
 alle konto 已经被找到， 结束搜索了 
 
-## 3.3 Kruskal Algorithmus 
+
+
+
+
+### 6.2.2 Prims' Algorithmus Beispiel 
+
+
+![[04_Algorithm/image/Pasted image 20250625104521.png]]
+
+
+Um **Prim’s Algorithmus** auf den gegebenen gewichteten, ungerichteten Graphen anzuwenden, wählen wir einen Startknoten (z. B. **A**) und bauen schrittweise den **Minimalen Spannbaum (MST)** auf, indem wir **immer die günstigste Kante** (mit dem kleinsten Gewicht) zu einem noch nicht besuchten Knoten hinzufügen.
+
+
+
+Prim’s Algorithmus Schritt für Schritt (Start bei **A**):
+
+MST-Knoten: {A}
+
+Mögliche Kanten: A—B(11)  
+➡️ **Wähle A—B(11)**  
+→ Neuer Knoten: B  
+→ MST-Kanten: [A—B]
+
+
+
+MST-Knoten: {A, B}
+
+Mögliche Kanten:
+
+- B—C(3)
+    
+- B—D(14)  
+    ➡️ **Wähle B—C(3)**  
+    → Neuer Knoten: C  
+    → MST-Kanten: [A—B, B—C]
+    
+
+
+
+MST-Knoten: {A, B, C}
+
+Mögliche Kanten:
+
+- C—D(12)
+    
+- C—F(15)
+    
+- C—G(2)
+    
+- B—D(14)  
+    ➡️ **Wähle C—G(2)**  
+    → Neuer Knoten: G  
+    → MST-Kanten: [A—B, B—C, C—G]
+    
+
+
+
+MST-Knoten: {A, B, C, G}
+
+Mögliche Kanten:
+
+- G—F(9)
+    
+- G—H(10)
+    
+- G—E(6)
+    
+- C—D(12)
+    
+- C—F(15)  
+    ➡️ **Wähle G—E(6)**  
+    → Neuer Knoten: E  
+    → MST-Kanten: [A—B, B—C, C—G, G—E]
+    
+
+
+
+MST-Knoten: {A, B, C, G, E}
+
+Mögliche Kanten:
+
+- E—D(7)
+    
+- G—F(9)
+    
+- G—H(10)  
+    ➡️ **Wähle E—D(7)**  
+    → Neuer Knoten: D  
+    → MST-Kanten: [A—B, B—C, C—G, G—E, E—D]
+    
+
+
+
+MST-Knoten: {A, B, C, G, E, D}
+
+Mögliche Kanten:
+
+- G—F(9)
+    
+- G—H(10)
+    
+- D—C(12)  
+    ➡️ **Wähle G—F(9)**  
+    → Neuer Knoten: F  
+    → MST-Kanten: [A—B, B—C, C—G, G—E, E—D, G—F]
+    
+
+
+
+
+MST-Knoten: {A, B, C, G, E, D, F}
+
+Mögliche Kanten:
+
+- F—H(5)
+    
+- G—H(10)  
+    ➡️ **Wähle F—H(5)**  
+    → Neuer Knoten: H  
+    → MST-Kanten: [A—B, B—C, C—G, G—E, E—D, G—F, F—H]
+
+
+**Kanten im MST:**
+
+- A—B (11)
+    
+- B—C (3)
+    
+- C—G (2)
+    
+- G—E (6)
+    
+- E—D (7)
+    
+- G—F (9)
+    
+- F—H (5)
+    
+
+**Gesamtkosten:**  
+11 + 3 + 2 + 6 + 7 + 9 + 5 = **43**
+
+
+![[04_Algorithm/image/Pasted image 20250625105400.png]]
+
+
+
+### 6.2.3 Beispiel 3
+
+![[04_Algorithm/image/Pasted image 20250625105640.png]]
+
+![[04_Algorithm/image/Pasted image 20250625110211.png]]
+
+Minimum Spanning Tree (MST)  
+
+Key Notes:
+The algorithm always selects the smallest edge that connects a node in the MST to a node outside it.
+
+The MST is a subset of edges that connects all nodes with the minimal total weight and no cycles.
+
+The total weight of the MST in this case is 34.
+
+If the graph's edges were different from the assumed connections, the steps would adjust accordingly, but the methodology remains the same.
+
+==wenn alle nachbaren schon besucht , dann algo Search fur den Konte beendet und suche xx beim andern Konto ==
+
+![[04_Algorithm/image/Pasted image 20250625110550.png]]
+
+
+![[04_Algorithm/image/Pasted image 20250625110704.png]]
+
+
+## 6.3 Kruskal Algorithmus 
+
+
+![[04_Algorithm/image/Pasted image 20250625112246.png]]
+
+![[04_Algorithm/image/Pasted image 20250625112309.png]]
+
 
 
 ![](image/Pasted%20image%2020250619125142.png)
@@ -178,7 +434,7 @@ alle konto 已经被找到， 结束搜索了
 ![](image/Pasted%20image%2020250619125304.png)
 
 
-### 3.3.1 Beispiel 
+### 6.3.1 Beispiel 
 
 ![](image/Pasted%20image%2020250619125430.png)
 
@@ -217,9 +473,25 @@ falls es zwei kante mit 3 gibt ?   egal 随便先连接那两个
 
 ![](image/Pasted%20image%2020250619125922.png)
 
-# 4 Aufgabe 
+### 6.3.2 Beispiel2 
 
-## 4.1 Aufgabe 3.1 
+![[04_Algorithm/image/Pasted image 20250625112512.png]]
+
+
+
+![[04_Algorithm/image/Pasted image 20250625112854.png]]
+
+![[04_Algorithm/image/Pasted image 20250625113144.png]]
+
+# 7 Reverse Delete
+
+
+
+
+
+# 8 Aufgabe 
+
+## 8.1 Aufgabe 3.1 
 
 ![](image/Pasted%20image%2020250619130203.png)
 
@@ -227,7 +499,7 @@ falls es zwei kante mit 3 gibt ?   egal 随便先连接那两个
 welche Algorithmus hier am Besten anpassen
 
 
-### 4.1.1 用 krukal ALgorithmus 
+### 8.1.1 用 krukal ALgorithmus 
 
 1
 ![](image/Pasted%20image%2020250619130447.png)
@@ -250,7 +522,7 @@ welche Algorithmus hier am Besten anpassen
 
 
 
-## 4.2 Aufgabe 3.2 
+## 8.2 Aufgabe 3.2 
 
 ![](image/Pasted%20image%2020250619130723.png)
 
@@ -277,11 +549,11 @@ oberschrank fur Y   . muss < 60    意味 下一步会使用 connect 两个 meng
 ![](image/Pasted%20image%2020250619131151.png)
 
 
-## 4.3 Aufgabe 3.3 
+## 8.3 Aufgabe 3.3 
 
 
 
-### 4.3.1 prim Simulation
+### 8.3.1 prim Simulation
 
 
 ![](image/Pasted%20image%2020250619131504.png)
@@ -303,7 +575,7 @@ oberschrank fur Y   . muss < 60    意味 下一步会使用 connect 两个 meng
 ![](image/Pasted%20image%2020250619131708.png)
 
 
-### 4.3.2 Kruskal Simulation 
+### 8.3.2 Kruskal Simulation 
 
 immer kleinest kante 
 
@@ -332,7 +604,7 @@ immer kleinest kante
 
 
 
-# 5 Quiz
+# 9 Quiz
 
 Kreuzen Sie für jeden der sechs Graphen an, ob die markierten Kanten nur durch den
 Prim Algorithmus, nur durch den Kruskal Algorithmus, durch beide oder durch keinen
@@ -470,10 +742,26 @@ prim: startkonte 可以是  in jedem markierten knoten
 
 
 
+## 9.1 Quiz 2 
+
+
+![[04_Algorithm/image/Pasted image 20250625113507.png]]
+
+
+lineke : 
+nur Prim oder keiner 
+prim: Prim mit Start in mitte
 
 
 
+Rechte: 
+![[04_Algorithm/image/Pasted image 20250625114143.png]]
 
+prim: 从 右边第二个点 
+![[04_Algorithm/image/Pasted image 20250625114830.png]]
+
+
+kruskal geht auch 
 
 
 
